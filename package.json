@@ -1,0 +1,16 @@
+{
+  "name": "smart-mess",
+  "version": "1.0.0",
+  "description": "A smart mess management system.",
+  "main": "app.js",
+  "scripts": {
+    "start-watch": "nodemon app",
+    "start": "node app"
+  },
+  "author": "Nishan",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  }
+}
