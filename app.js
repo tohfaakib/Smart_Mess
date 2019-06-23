@@ -1,3 +1,4 @@
+// dec
 var express = require('express');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
@@ -43,5 +44,5 @@ app.get('/', (request, response) => {
 
 //Server Startup
 app.listen(port, () => {
-    console.log(`Server Started at, http://127.0.01:${port}`);
+    console.log(`Server Started at, http://127.0.0.1:${port}`);
 })
