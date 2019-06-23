@@ -17,16 +17,22 @@
                     <h3 class="panel-title">Please sign up</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" method="post">
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
                                 </div>
+                                <div>
+                                    <label style="color: red"><%if (first_name=='empty') { %> First name Field required! <% } %></label>
+                                </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                </div>
+                                <div>
+                                    <label style="color: red"><%if (last_name=='empty') { %> Last name Field required! <% } %></label>
                                 </div>
                             </div>
                         </div>
@@ -34,18 +40,45 @@
                         <div class="form-group">
                             <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
                         </div>
+                        <div>
+                            <label style="color: red"><%if (email=='empty') { %> Email Field required! <% } %></label>
+                        </div>
+
+                        <div>
+                            <label style="color: red"><%if (email_exist=='yes') { %> Email Already Exists! <% } %></label>
+                        </div>
 
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
                                 </div>
+                                <div>
+                                    <label style="color: red"><%if (password=='empty') { %> Password Field required! <% } %></label>
+                                </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
                                 </div>
+                                <div>
+                                    <label style="color: red"><%if (password_confirmation=='empty') { %> Confirm Password Field required! <% } %></label>
+                                </div>
+                                <div>
+                                    <label style="color: red"><%if (pass_mismatch=='yes') { %> Password didn't match! <% } %></label>
+                                </div>
+
                             </div>
+
+                        </div>
+
+                        <select class="form-control input-sm">
+                            <option name="role" value="" disabled selected>Select Your Role</option>
+                            <option name="role" value="Manager">Manager</option>
+                            <option name="role" value="Member">Memeber</option>
+                        </select><br>
+                        <div>
+                            <label style="color: red"><%if (role=='empty') { %> Role required! <% } %></label>
                         </div>
 
                         <input type="submit" value="Register" class="btn btn-info btn-block">
