@@ -19,11 +19,11 @@
 <!--                <li id="contact"><a href="/signup">Sign Up</a></li>-->
 <!--                <li id="contact"><a href="/logout">Logout</a></li>-->
                 <% if(locals.loggedin){ %>
-                    <li id="contact"><a href="/logout">Logout</a></li>
-                    <li id="contact"><a href="/profile">Welcome, <%= locals.fullname %></a></li>
+                    <li id="contact"><a href="/logout">LOGOUT</a></li>
+                    <li id="contact"><a href="/profile"><%= locals.fullname %></a></li>
                 <% } else{ %>
-                    <li id="contact"><a href="/login">Login</a></li>
-                    <li id="contact"><a href="/signup">Sign Up</a></li>
+                    <li id="contact"><a href="/login">LOGIN</a></li>
+                    <li id="contact"><a href="/signup">SIGN UP</a></li>
 
                 <% } %>
             </ul>

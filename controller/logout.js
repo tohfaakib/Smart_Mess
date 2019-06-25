@@ -1,17 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', (req, response, next) => {
+
+router.get('/', (req, res, next) => {
     if (req.session.email != null){
         next();
     } else {
-        response.redirect('/login');
+        res.redirect('/login');
     }
 });
 
-router.get('/', (req, response) => {
+router.get('/', (req, res) => {
     req.session.email = null;
-    response.redirect('/login');
+    req.session.email = null;
+    req.session.fullname = null;
+    res.redirect('/login');
+
+
 });
 
 

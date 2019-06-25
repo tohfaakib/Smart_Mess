@@ -32,12 +32,25 @@ app.use('/contact', contact);
 
 // make the data global for ejs template
 app.use(function (req, res, next) {
-    if (req.session.email) {
-        app.locals.loggedin = req.session.email;
-        app.locals.fullname = req.session.fullname;
+
+    if (req.session.email !==null){
+        app.locals = {
+            loggedin: req.session.email,
+            fullname: req.session.fullname
+        };
+    } else {
+        app.locals = {
+            loggedin: null,
+            fullname: null
+        };
     }
+
+
     next();
 });
+
+
+
 
 
 
@@ -55,3 +68,5 @@ app.get('/', (request, response) => {
 app.listen(port, () => {
     console.log(`Server Started at, http://127.0.0.1:${port}`);
 })
+
+
