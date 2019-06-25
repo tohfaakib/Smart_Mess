@@ -33,7 +33,7 @@ app.use('/contact', contact);
 // make the data global for ejs template
 app.use(function (req, res, next) {
     if (req.session.email) {
-        res.locals.loggedin = req.session.email;
+        app.locals.loggedin = req.session.email;
     }
     next();
 });

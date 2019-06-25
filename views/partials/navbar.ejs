@@ -20,10 +20,11 @@
 <!--                <li id="contact"><a href="/logout">Logout</a></li>-->
                 <% if(locals.loggedin){ %>
                     <li id="contact"><a href="/logout">Logout</a></li>
+                    <li id="contact"><a href="/signup"><%= locals.loggedin %></a></li>
                 <% } else{ %>
                     <li id="contact"><a href="/login">Login</a></li>
                     <li id="contact"><a href="/signup">Sign Up</a></li>
-                    <li id="contact"><a href="/signup"><%= locals.user %></a></li>
+
                 <% } %>
             </ul>
         </div>
