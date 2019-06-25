@@ -21,69 +21,69 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-        var first_name = '';
-        var last_name = '';
-        var email = '';
-        var password = '';
-        var password_confirmation = '';
-        var role = '';
+    var first_name = '';
+    var last_name = '';
+    var email = '';
+    var password = '';
+    var password_confirmation = '';
+    var role = '';
 
-        if (req.body.first_name === '' || req.body.last_name === '' || req.body.email === '' || req.body.password === '' || req.body.password_confirmation === '' || req.body.role === '') {
+    if (req.body.first_name === '' || req.body.last_name === '' || req.body.email === '' || req.body.password === '' || req.body.password_confirmation === '' || req.body.role === '') {
 
-                if (req.body.first_name === '') {
-                        first_name = 'empty';
-                } else if (req.body.last_name === '') {
-                        last_name = 'empty';
-                } else if (req.body.email === '') {
-                        email = 'empty';
-                } else if (req.body.password === '') {
-                        password = 'empty';
-                } else if (req.body.password_confirmation === '') {
-                        password_confirmation = 'empty';
-                } else if (req.body.role !== 'Manager' || req.body.role !== 'Member' ){
-                         role = 'empty';
-                }
-
-
-                res.render('signup', {page: 'SignUp', menuId:'signup', first_name, last_name, email, password, password_confirmation, role, pass_mismatch:null, email_exist: null});
+        if (req.body.first_name === '') {
+                first_name = 'empty';
+        } else if (req.body.last_name === '') {
+                last_name = 'empty';
+        } else if (req.body.email === '') {
+                email = 'empty';
+        } else if (req.body.password === '') {
+                password = 'empty';
+        } else if (req.body.password_confirmation === '') {
+                password_confirmation = 'empty';
+        } else if (req.body.role !== 'Manager' || req.body.role !== 'Member' ){
+                 role = 'empty';
         }
-        else {
-
-                if (req.body.password === req.body.password_confirmation) {
-
-                    var data = {
-                        email: req.body.email
-                    }
-
-                    user.getByEmail(data, (result) => {
-                            if (result.length > 0) {
-                                    res.render('signup', {page: 'SignUp', menuId:'signup', first_name:null, last_name:null, email:null, password:null, password_confirmation:null, role:null, pass_mismatch:null, email_exist: 'yes'});
-                            }
-                            else {
-                                    
-                                var data = {
-                                    first_name: req.body.first_name,
-                                    last_name: req.body.last_name,
-                                    email: req.body.email,
-                                    password: req.body.password,
-                                    role: req.body.role
-                                }
-                                user.insert(data, (result) => {
-                                        if (result) {
-                                                res.redirect('/login');
-                                        } else {
-                                                res.send("Signup Failed!");
-                                        }
-                                });
-                            }
-                    });
 
 
+        res.render('signup', {page: 'SignUp', menuId:'signup', first_name, last_name, email, password, password_confirmation, role, pass_mismatch:null, email_exist: null});
+    }
+    else {
+
+        if (req.body.password === req.body.password_confirmation) {
+
+            var data = {
+                email: req.body.email
+            }
+
+            user.getByEmail(data, (result) => {
+                if (result.length > 0) {
+                    res.render('signup', {page: 'SignUp', menuId:'signup', first_name:null, last_name:null, email:null, password:null, password_confirmation:null, role:null, pass_mismatch:null, email_exist: 'yes'});
                 }
                 else {
-                        res.render('signup', {page: 'SignUp', menuId:'signup', first_name:null, last_name:null, email:null, password:null, password_confirmation:null, role:null, pass_mismatch:'yes', email_exist: null});
+
+                    var data = {
+                        first_name: req.body.first_name,
+                        last_name: req.body.last_name,
+                        email: req.body.email,
+                        password: req.body.password,
+                        role: req.body.role
+                    }
+                    user.insert(data, (result) => {
+                        if (result) {
+                                res.redirect('/login');
+                        } else {
+                                res.send("Signup Failed!");
+                        }
+                    });
                 }
+            });
+
+
         }
+        else {
+            res.render('signup', {page: 'SignUp', menuId:'signup', first_name:null, last_name:null, email:null, password:null, password_confirmation:null, role:null, pass_mismatch:'yes', email_exist: null});
+        }
+    }
 
 
 });

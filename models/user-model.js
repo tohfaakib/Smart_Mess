@@ -1,13 +1,27 @@
 var db = require('./db');
 
 module.exports = {
-
 	getById: function(id, callback){
 		var sql = "select * from users where id="+id;
 		db.execute(sql, function(result){
 			callback(result);
 		});
 	},
+
+	getByEmail: function(user, callback){
+		var sql = "select * from users where email = '"+user.email+"' ";
+		db.execute(sql, function(result){
+			callback(result);
+		});
+	},
+
+	getByEmailPass: function(user, callback){
+		var sql = "SELECT * FROM users WHERE email = '"+user.email+"' AND password='"+user.password+"'";
+		db.execute(sql, function(result){
+			callback(result);
+		});
+	},
+
 	getAll: function(callback){
 
 		var sql = "select * from users";
@@ -21,28 +35,32 @@ module.exports = {
 			callback(status)
 		});
 	},
-	update: function(user, callback){
-		var sql = "update users set username='"+user.username+"', password='"+user.password+"' where id="+user.id;
+	updateById: function(user, callback){
+		var sql = "update users set first_name='"+user.first_name+"', last_name='"+user.last_name+"', password='"+user.password+"', role='"+user.role+"' where id="+user.id;
 		db.execute(sql, function(status){
 			callback(status)
 		});
 	},
-	delete: function(id, callback){
-		var sql = "delete from users where id="+user.id;
+
+	updateByEmail: function(user, callback){
+		var sql = "update users set first_name='"+user.first_name+"', last_name='"+user.last_name+"', password='"+user.password+"', role='"+user.role+"' where email="+user.email;
 		db.execute(sql, function(status){
 			callback(status)
 		});
 	},
-	getByEmail: function(user, callback){
-		var sql = "select * from users where email = '"+user.email+"' ";
-		db.execute(sql, function(result){
-			callback(result);
+
+	deleteById: function(id, callback){
+		var sql = "delete from users where id="+id;
+		db.execute(sql, function(status){
+			callback(status)
 		});
 	},
-	getByEmailPass: function(user, callback){
-		var sql = "SELECT * FROM users WHERE email = '"+user.email+"' AND password='"+user.password+"'";
-		db.execute(sql, function(result){
-			callback(result);
+
+	deleteByEmail: function(email, callback){
+		var sql = "delete from users where email="+email;
+		db.execute(sql, function(status){
+			callback(status)
 		});
-	}
+	},
+
 }
