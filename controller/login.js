@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var user = require.main.require('./models/user-model');
 
-var db = require.main.require('./models/db');
 
 router.get('/', (req, res) => {
     if (req.session.email == null) {
@@ -13,9 +13,12 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req, res) => {
-    sql = "SELECT * FROM users WHERE email = '"+req.body.email+"' AND password='"+req.body.password+"'";
 
-    db.dbOperation(sql, (result) => {
+    data = {
+        email: req.body.email,
+        password: req.body.password
+    }
+    user.getByEmailPass(data, (result) => {
         if (result.length > 0) {
             req.session.email = req.body.email;
             res.redirect('/');

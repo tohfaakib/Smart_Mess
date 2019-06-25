@@ -22,7 +22,7 @@ var getConnection = function (callback) {
 };
 
 module.exports = {
-    dbOperation: (sql, callback) => {
+    execute: (sql, callback) => {
         getConnection((connection) => {
             connection.query(sql, (err, res) => {
                 if (err){

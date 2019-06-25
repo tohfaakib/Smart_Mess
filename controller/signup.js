@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
-var db = require.main.require('./models/db');
+var user = require.main.require('./models/user-model');
 
 
 
@@ -22,7 +21,7 @@ router.post('/', (req, res) => {
         var password_confirmation = '';
         var role = '';
 
-        if (req.body.first_name === '' || req.body.last_name === '' || req.body.email === '' || req.body.password === '' || req.body.password_confirmation === '') {
+        if (req.body.first_name === '' || req.body.last_name === '' || req.body.email === '' || req.body.password === '' || req.body.password_confirmation === '' || req.body.role === '') {
 
                 if (req.body.first_name === '') {
                         first_name = 'empty';
@@ -34,13 +33,9 @@ router.post('/', (req, res) => {
                         password = 'empty';
                 } else if (req.body.password_confirmation === '') {
                         password_confirmation = 'empty';
+                } else if (req.body.role !== 'Manager' || req.body.role !== 'Member' ){
+                         role = 'empty';
                 }
-
-
-                // else if (req.body.role !== "Manager" || req.body.role !== "Member") {
-                //         role = 'empty';
-                // }
-
 
 
                 res.render('signup', {page: 'SignUp', menuId:'signup', first_name, last_name, email, password, password_confirmation, role, pass_mismatch:null, email_exist: null});
@@ -49,23 +44,32 @@ router.post('/', (req, res) => {
 
                 if (req.body.password === req.body.password_confirmation) {
 
-                        sql = "SELECT * FROM users WHERE email = '"+req.body.email+"'";
+                    var data = {
+                        email: req.body.email
+                    }
 
-                        db.dbOperation(sql, (result) => {
-                                if (result.length > 0) {
-                                        res.render('signup', {page: 'SignUp', menuId:'signup', first_name:null, last_name:null, email:null, password:null, password_confirmation:null, role:null, pass_mismatch:null, email_exist: 'yes'});
+                    user.getByEmail(data, (result) => {
+                            if (result.length > 0) {
+                                    res.render('signup', {page: 'SignUp', menuId:'signup', first_name:null, last_name:null, email:null, password:null, password_confirmation:null, role:null, pass_mismatch:null, email_exist: 'yes'});
+                            }
+                            else {
+                                    
+                                var data = {
+                                    first_name: req.body.first_name,
+                                    last_name: req.body.last_name,
+                                    email: req.body.email,
+                                    password: req.body.password,
+                                    role: req.body.role
                                 }
-                                 else {
-                                        sql = "INSERT INTO users (first_name, last_name, email, password, role) VALUES ('"+req.body.first_name+"', '"+req.body.last_name+"', '"+req.body.email+"', '"+req.body.password+"', '"+req.body.role+"')";
-                                        db.dbOperation(sql, (result) => {
-                                                if (result) {
-                                                        res.redirect('/login');
-                                                } else {
-                                                        res.send("Signup Failed!");
-                                                }
-                                        });
-                                }
-                        });
+                                user.insert(data, (result) => {
+                                        if (result) {
+                                                res.redirect('/login');
+                                        } else {
+                                                res.send("Signup Failed!");
+                                        }
+                                });
+                            }
+                    });
 
 
                 }
