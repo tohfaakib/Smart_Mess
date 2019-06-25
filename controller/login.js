@@ -3,6 +3,15 @@ var router = express.Router();
 var user = require.main.require('./models/user-model');
 
 
+router.get('*', (req, res, next) => {
+    if (req.session.email == null) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+});
+
+
 router.get('/', (req, res) => {
     if (req.session.email == null) {
         res.render('login', {page: 'Login', menuId:'login'});

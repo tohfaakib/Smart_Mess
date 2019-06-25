@@ -3,6 +3,14 @@ var router = express.Router();
 var user = require.main.require('./models/user-model');
 
 
+router.get('*', (req, res, next) => {
+    if (req.session.email == null) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+});
+
 
 router.get('/', (req, res) => {
     if (req.session.email == null) {
@@ -11,7 +19,6 @@ router.get('/', (req, res) => {
         res.redirect('/');
     }
 });
-
 
 router.post('/', (req, res) => {
         var first_name = '';
