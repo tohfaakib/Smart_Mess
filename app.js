@@ -56,6 +56,8 @@ app.use(function (req, res, next) {
 
 
 
+
+
 // Routing
 app.get('/', (request, response) => {
     // response.send("Welcome");
@@ -70,3 +72,15 @@ app.listen(port, () => {
 })
 
 
+// module.exports = {
+//   clearAppLocals: () => {
+//       app.use(function (req, res, next) {
+//           app.locals = {
+//               loggedin: null,
+//               fullname: null
+//           };
+//           next();
+//       });
+//   },
+//
+// };
