@@ -30,8 +30,7 @@ router.post('/', (req, res) => {
     user.getByEmailPass(data, (result) => {
         if (result.length > 0) {
             req.session.email = req.body.email;
-            // res.locals.user = req.session.email;
-            // console.log(res.locals.user);
+            req.session.fullname = result[0].first_name.toUpperCase()+" "+result[0].last_name.toUpperCase();
             res.redirect('/');
         } else {
             res.send("Authentication failed!");

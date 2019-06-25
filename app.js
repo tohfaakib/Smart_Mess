@@ -34,6 +34,7 @@ app.use('/contact', contact);
 app.use(function (req, res, next) {
     if (req.session.email) {
         app.locals.loggedin = req.session.email;
+        app.locals.fullname = req.session.fullname;
     }
     next();
 });
