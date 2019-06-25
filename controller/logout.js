@@ -15,8 +15,10 @@ router.get('/', (req, res, next) => {
 router.get('/', (req, res) => {
     req.session.email = null;
     req.session.fullname = null;
-
-    // app.clearAppLocals();
+    req.app.locals = {
+        loggedin: null,
+        fullname: null
+    }
 
     res.redirect('/login');
 

@@ -37,15 +37,8 @@ app.use(function (req, res, next) {
         app.locals = {
             loggedin: req.session.email,
             fullname: req.session.fullname
-        };
-    } else {
-        app.locals = {
-            loggedin: null,
-            fullname: null
-        };
+        }
     }
-
-
     next();
 });
 
