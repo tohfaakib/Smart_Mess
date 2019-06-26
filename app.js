@@ -39,17 +39,9 @@ app.use(function (req, res, next) {
             fullname: req.session.fullname
         }
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 2cbd66fc79755e422829c9e293e16e8a728a666e
     next();
 });
-
-// TODO
-// solving app.locals problem.
-
-
 
 
 
