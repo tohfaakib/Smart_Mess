@@ -37,14 +37,12 @@ app.use(function (req, res, next) {
         app.locals = {
             loggedin: req.session.email,
             fullname: req.session.fullname
-        };
-    } else {
-        app.locals = {
-            loggedin: null,
-            fullname: null
-        };
+        }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2cbd66fc79755e422829c9e293e16e8a728a666e
     next();
 });
 
