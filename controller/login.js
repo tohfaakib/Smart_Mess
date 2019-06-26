@@ -15,11 +15,7 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    if (req.session.email == null) {
         res.render('login', {page: 'Login', menuId:'login'});
-    } else {
-        res.redirect('/');
-    }
 });
 
 
