@@ -16,16 +16,35 @@
                     <form role="form" method="post">
 
                         <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                            <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                            <label style="color: red">
+                                <%if(typeof errors != "undefined"){%>
+                                    <% errors.forEach(function(err){ %>
+                                        <%if(err.param == "email"){%>
+                                            <%=err.msg%> <br/>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </label>
                         </div>
 
                         <div class="form-group">
                             <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                            <label style="color: red">
+                                <%if(typeof errors != "undefined"){%>
+                                    <% errors.forEach(function(err){ %>
+                                    <%if(err.param == "password"){%>
+                                    <%=err.msg%> <br/>
+                                    <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </label>
                         </div>
 
                         <input type="submit" value="Login" class="btn btn-info btn-block">
 
                     </form>
+
                 </div>
             </div>
         </div>
