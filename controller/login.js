@@ -43,9 +43,11 @@ router.post('/', (req, res) => {
             password: req.body.password
         }
         user.getByEmailPass(data, (result) => {
+            console.log(result);
             if (result.length > 0) {
                 req.session.email = req.body.email;
                 req.session.fullname = result[0].first_name.toUpperCase()+" "+result[0].last_name.toUpperCase();
+                req.session.role = result[0].role;
                 res.redirect('/');
             } else {
                 res.send("Authentication failed!");

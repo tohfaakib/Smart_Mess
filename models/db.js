@@ -22,24 +22,44 @@ var getConnection = function (callback) {
 };
 
 module.exports = {
-    execute: (sql, callback) => {
-        getConnection((connection) => {
-            connection.query(sql, (err, res) => {
-                if (err){
-                    console.log(`Error with message, ${err}`)
-                } else {
-                    callback(res);
-                }
+    execute: (sql, params, callback) => {
+        if (params !== ""){
+            getConnection((connection) => {
+                connection.query(sql, params, (err, res) => {
+                    if (err){
+                        console.log(`Error with message, ${err}`)
+                    } else {
+                        callback(res);
+                    }
+                });
 
+                connection.end((err) => {
+                    if (err) {
+                        console.log(`Ending error with message, ${err}`);
+                    } else {
+                        console.log("Connection Ended");
+                    }
+                });
             });
+        } else if (params === "") {
+            getConnection((connection) => {
+                connection.query(sql, (err, res) => {
+                    if (err){
+                        console.log(`Error with message, ${err}`)
+                    } else {
+                        callback(res);
+                    }
+                });
 
-            connection.end((err) => {
-                if (err) {
-                    console.log(`Ending error with message, ${err}`);
-                } else {
-                    console.log("Connection Ended");
-                }
+                connection.end((err) => {
+                    if (err) {
+                        console.log(`Ending error with message, ${err}`);
+                    } else {
+                        console.log("Connection Ended");
+                    }
+                });
             });
-        });
+        }
+
     },
 };

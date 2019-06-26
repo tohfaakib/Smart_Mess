@@ -31,7 +31,6 @@ router.post('/', (req, res) => {
                     res.render('signup', {page: 'SignUp', menuId:'signup', pass_mismatch: null, email_exist: 'yes'});
                 }
                 else {
-
                     req.checkBody('first_name', '*First Name field cannot be empty!').notEmpty();
                     req.checkBody('last_name', '*Last Name field cannot be empty!').notEmpty();
                     req.checkBody('email', '*Email field cannot be empty!').notEmpty();
@@ -63,19 +62,14 @@ router.post('/', (req, res) => {
                             }
                         });
                     }
-                    }
-
+                }
             });
-
         }
+
         else {
             res.render('signup', {page: 'SignUp', menuId:'signup', pass_mismatch:'yes', email_exist: null});
         }
-
-
-
 });
-
 
 
 module.exports = router;
