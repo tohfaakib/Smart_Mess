@@ -45,14 +45,11 @@ app.use(function (req, res, next) {
         };
     }
 
-
     next();
 });
 
-
-
-
-
+// TODO
+// solving app.locals problem.
 
 
 
@@ -72,15 +69,3 @@ app.listen(port, () => {
 })
 
 
-// module.exports = {
-//   clearAppLocals: () => {
-//       app.use(function (req, res, next) {
-//           app.locals = {
-//               loggedin: null,
-//               fullname: null
-//           };
-//           next();
-//       });
-//   },
-//
-// };

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var app = require.main.require('./app');
 
 
 router.get('/', (req, res, next) => {
@@ -16,12 +15,12 @@ router.get('/', (req, res) => {
     req.session.email = null;
     req.session.fullname = null;
 
-    // app.clearAppLocals();
 
     res.redirect('/login');
 
 
 });
+
 
 
 module.exports = router;
