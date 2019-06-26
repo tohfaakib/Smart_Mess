@@ -1,8 +1,6 @@
 <% include partials/header %>
 <% include partials/navbar %>
 
-
-
 <div class="container">
 
     <div class="jumbotron">
@@ -22,29 +20,47 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                                    <label style="color: red">
+                                        <%if(typeof errors != "undefined"){%>
+                                            <% errors.forEach(function(err){ %>
+                                            <%if(err.param == "first_name"){%>
+                                            <%=err.msg%> <br/>
+                                            <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
                                 </div>
-                                <div>
-                                    <label style="color: red"><%if (first_name=='empty') { %> First name Field required! <% } %></label>
-                                </div>
+
+
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                    <label style="color: red">
+                                        <%if(typeof errors != "undefined"){%>
+                                            <% errors.forEach(function(err){ %>
+                                            <%if(err.param == "last_name"){%>
+                                            <%=err.msg%> <br/>
+                                            <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
                                 </div>
-                                <div>
-                                    <label style="color: red"><%if (last_name=='empty') { %> Last name Field required! <% } %></label>
-                                </div>
+
                             </div>
                         </div>
 
                         <div class="form-group">
                             <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
-                        </div>
-                        <div>
-                            <label style="color: red"><%if (email=='empty') { %> Email Field required! <% } %></label>
-                        </div>
-
-                        <div>
+                            <label style="color: red">
+                                <%if(typeof errors != "undefined"){%>
+                                    <% errors.forEach(function(err){ %>
+                                    <%if(err.param == "email"){%>
+                                    <%=err.msg%> <br/>
+                                    <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </label>
                             <label style="color: red"><%if (email_exist=='yes') { %> Email Already Exists! <% } %></label>
                         </div>
 
@@ -52,23 +68,40 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                    <label style="color: red">
+                                        <%if(typeof errors != "undefined"){%>
+                                            <% errors.forEach(function(err){ %>
+                                                <%if(err.param == "password"){%>
+                                                    <%if(err.param == "password"){%>
+                                                        <%=err.msg%> <br/>
+                                                    <% } %>
+                                                <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
                                 </div>
-                                <div>
-                                    <label style="color: red"><%if (password=='empty') { %> Password Field required! <% } %></label>
-                                </div>
+
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                                    <label style="color: red">
+                                        <%if(typeof errors != "undefined"){%>
+                                            <% errors.forEach(function(err){ %>
+                                            <%if(err.param == "password_confirmation"){%>
+                                            <%=err.msg%> <br/>
+                                            <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
                                 </div>
-                                <div>
-                                    <label style="color: red"><%if (password_confirmation=='empty') { %> Confirm Password Field required! <% } %></label>
-                                </div>
+
                                 <div>
                                     <label style="color: red"><%if (pass_mismatch=='yes') { %> Password didn't match! <% } %></label>
                                 </div>
-
                             </div>
+
+
 
                         </div>
 
@@ -76,10 +109,19 @@
                             <option  type="text" value="">Select Your Role</option>
                             <option type="text" value="Manager">Manager</option>
                             <option type="text" value="Member">Member</option>
+
+
                         </select><br>
-                        <div>
-                            <label style="color: red"><%if (role=='empty') { %> Role required! <% } %></label>
-                        </div>
+                        <label style="color: red">
+                            <%if(typeof errors != "undefined"){%>
+                                <% errors.forEach(function(err){ %>
+                                <%if(err.param == "role"){%>
+                                <%=err.msg%> <br/>
+                                <% } %>
+                                <% }); %>
+                            <% } %>
+                        </label>
+
 
                         <input type="submit" value="Register" class="btn btn-info btn-block">
 

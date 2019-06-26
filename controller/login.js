@@ -27,14 +27,14 @@ router.post('/', (req, res) => {
 
     req.checkBody('email', 'Email field cannot be empty.').notEmpty();
     req.checkBody('email', 'Please enter a valid email').isEmail();
-    // req.checkBody('email', 'Username can only contain letters, numbers, or underscores.').matches(/^[A-Za-z0-9_-]+$/, 'i');
     req.checkBody('password', 'Password field cannot be empty.').notEmpty();
+    // req.checkBody('email', 'Username can only contain letters, numbers, or underscores.').matches(/^[A-Za-z0-9_-]+$/, 'i');
     // req.checkBody('password', 'Password must be between 3-60 characters long.').len(3, 30);
     // req.checkBody("password", "Password must include one lowercase character, one uppercase character, a number, and a special character.").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?=.*[^a-zA-Z0-9]).{8,}$/, "i");
 
     const err = req.validationErrors();
 
-    
+
     if(err){
         res.render('login', {page: 'Login', menuId:'login', errors: err});
     }else{
