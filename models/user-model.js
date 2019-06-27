@@ -43,8 +43,8 @@ module.exports = {
 		});
 	},
 	updateById: function(user, callback){
-		var sql = "update users set first_name=?, last_name=?, phone=?, password=?, social_link=?,role=? where id=?";
-		db.execute(sql, [user.first_name, user.last_name, user.phone, user.password, user.social_link,user.role, user.id],function(status){
+		var sql = "update users set first_name=?, last_name=?, phone=?, social_link=?,role=? where id=?";
+		db.execute(sql, [user.first_name, user.last_name, user.phone, user.social_link,user.role, user.id],function(status){
 			callback(status)
 		});
 	},

@@ -64,11 +64,39 @@
                             <label style="color: red"><%if (email_exist=='yes') { %> Email Already Exists! <% } %></label>
                         </div>
 
+                        <div class="form-group">
+                            <input type="text" name="phone" id="phone" class="form-control input-sm" placeholder="Phone">
+                            <label style="color: red">
+                                <%if(typeof errors != "undefined"){%>
+                                    <% errors.forEach(function(err){ %>
+                                    <%if(err.param == "phone"){%>
+                                    <%=err.msg%> <br/>
+                                    <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </label>
+                            <label style="color: red"><%if (phone_exist=='yes') { %> Phone Number Already Exists! <% } %></label>
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="text" name="social_link" id="social_link" class="form-control input-sm" placeholder="Socail Link (Optional)">
+                            <label style="color: red">
+                                <%if(typeof errors != "undefined"){%>
+                                    <% errors.forEach(function(err){ %>
+                                    <%if(err.param == "social_link"){%>
+                                    <%=err.msg%> <br/>
+                                    <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </label>
+                        </div>
+
 
 
                         <select class="form-control input-sm" name="role" id="role">
 <!--                            <option  type="text" value="">Select Your Role</option>-->
-                            <option type="text" value="<%= result.first_name %>"><%= result.first_name %></option>
+                            <option type="text" value="<%= result.role %>"><%= result.role %></option>
 <!--                            <option type="text" value="Member">Member</option>-->
 
                         </select><br>
