@@ -1,0 +1,98 @@
+<% include partials/header %>
+<% include partials/navbar %>
+
+<div class="container">
+
+    <div class="jumbotron">
+        <h2>Update Profile</h2>
+    </div>
+
+
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Update Here</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" method="post">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="first_name" id="first_name" class="form-control input-sm" value="<%= result.first_name %>">
+                                    <label style="color: red">
+                                        <%if(typeof errors != "undefined"){%>
+                                            <% errors.forEach(function(err){ %>
+                                            <%if(err.param == "first_name"){%>
+                                            <%=err.msg%> <br/>
+                                            <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
+                                </div>
+
+
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="last_name" id="last_name" class="form-control input-sm" value="<%= result.last_name %>">
+                                    <label style="color: red">
+                                        <%if(typeof errors != "undefined"){%>
+                                            <% errors.forEach(function(err){ %>
+                                            <%if(err.param == "last_name"){%>
+                                            <%=err.msg%> <br/>
+                                            <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control input-sm" value="<%= result.email %>">
+                            <label style="color: red">
+                                <%if(typeof errors != "undefined"){%>
+                                    <% errors.forEach(function(err){ %>
+                                    <%if(err.param == "email"){%>
+                                    <%=err.msg%> <br/>
+                                    <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </label>
+                            <label style="color: red"><%if (email_exist=='yes') { %> Email Already Exists! <% } %></label>
+                        </div>
+
+
+
+                        <select class="form-control input-sm" name="role" id="role">
+<!--                            <option  type="text" value="">Select Your Role</option>-->
+                            <option type="text" value="<%= result.first_name %>"><%= result.first_name %></option>
+<!--                            <option type="text" value="Member">Member</option>-->
+
+                        </select><br>
+                        <label style="color: red">
+                            <%if(typeof errors != "undefined"){%>
+                                <% errors.forEach(function(err){ %>
+                                <%if(err.param == "role"){%>
+                                <%=err.msg%> <br/>
+                                <% } %>
+                                <% }); %>
+                            <% } %>
+                        </label>
+
+
+                        <input type="submit" value="Register" class="btn btn-info btn-block">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<% include partials/script %>
