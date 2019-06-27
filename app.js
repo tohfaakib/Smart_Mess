@@ -9,6 +9,7 @@ var app = express();
 var port = 3000;
 
 // var home = require('./controller/home');
+var profile = require('./controller/profile');
 var login = require('./controller/login');
 var signup = require('./controller/signup');
 var logout = require('./controller/logout');
@@ -27,6 +28,7 @@ app.use(exValidator());
 app.use('/static', express.static('static'));
 
 // app.use('/', home);
+app.use('/profile', profile);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/logout', logout);
@@ -40,7 +42,8 @@ app.use(function (req, res, next) {
     if (req.session.email !==null){
         app.locals = {
             loggedin: req.session.email,
-            fullname: req.session.fullname
+            fullname: req.session.fullname,
+            role: req.session.role,
         }
     }
 
