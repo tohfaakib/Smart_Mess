@@ -39,13 +39,13 @@ app.use('/contact', contact);
 // make the data global for ejs template
 app.use(function (req, res, next) {
 
-    if (req.session.email !==null){
+
         app.locals = {
             loggedin: req.session.email,
             fullname: req.session.fullname,
             role: req.session.role,
-        }
-    }
+        };
+
 
     next();
 });
@@ -54,10 +54,17 @@ app.use(function (req, res, next) {
 
 // Routing
 app.get('/', (req, res) => {
+    user = {
+        user_id: req.session.user_id,
+        email: req.session.email,
+        first_name: req.session.first_name,
+        last_name: req.session.last_name,
+        role: req.session.role,
+    };
     if (req.session.id != null) {
-        res.render('home/index', {page: 'Home', menuId:'home', user_id: req.session.user_id});
+        res.render('home/index', {page: 'Home', menuId:'home', user});
     } else {
-        res.render('home/index', {page: 'Home', menuId:'home', user_id: null});
+        res.render('home/index', {page: 'Home', menuId:'home', user: null});
     }
 
 });
