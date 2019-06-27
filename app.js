@@ -8,7 +8,7 @@ var exValidator = require('express-validator');
 var app = express();
 var port = 3000;
 
-var home = require('./controller/home');
+// var home = require('./controller/home');
 var login = require('./controller/login');
 var signup = require('./controller/signup');
 var logout = require('./controller/logout');
@@ -26,7 +26,7 @@ app.use(expressSession({secret:'secret_pass', saveUninitialized:true, resave:fal
 app.use(exValidator());
 app.use('/static', express.static('static'));
 
-app.use('/', home);
+// app.use('/', home);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/logout', logout);
@@ -50,10 +50,10 @@ app.use(function (req, res, next) {
 
 
 // Routing
-// app.get('/', (request, response) => {
-//     // response.send("Welcome");
-//     response.render('home', {page: 'Home', menuId:'home'});
-// });
+app.get('/', (request, response) => {
+    // response.send("Welcome");
+    response.render('home/index', {page: 'Home', menuId:'home'});
+});
 
 
 

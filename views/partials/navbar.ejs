@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default">
-<!--    <div class="container">-->
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
@@ -14,16 +14,16 @@
                 <li id="about"><a href="/about">ABOUT US</a></li>
                 <li id="contact"><a href="/contact">CONTACT US</a></li>
                 <% if(locals.loggedin){ %>
-                    <li id="contact"><a href="/logout">LOGOUT</a></li>
-                    <li id="contact"><a href="/profile"><%= locals.fullname %></a></li>
+                    <li id=""><a href="/logout">LOGOUT</a></li>
+                    <li id=""><a href="/profile"><%= locals.fullname %></a></li>
                 <% } else{ %>
-                    <li id="contact"><a href="/login">LOGIN</a></li>
-                    <li id="contact"><a href="/signup">SIGN UP</a></li>
+                    <li id=""><a href="/login">LOGIN</a></li>
+                    <li id=""><a href="/signup">SIGN UP</a></li>
 
                 <% } %>
             </ul>
         </div>
-<!--    </div>-->
+    </div>
 </nav>
 
 
