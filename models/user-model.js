@@ -15,6 +15,13 @@ module.exports = {
 		});
 	},
 
+	getByPhone: function(user, callback){
+		var sql = "select * from users where phone = ?";
+		db.execute(sql, [user.phone],function(result){
+			callback(result);
+		});
+	},
+
 	getByEmailPass: function(user, callback){
 		var sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 		db.execute(sql, [user.email, user.password], function(result){
@@ -30,21 +37,21 @@ module.exports = {
 		});
 	},
 	insert: function(user, callback){
-		sql = "INSERT INTO users (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?)";
-		db.execute(sql, [user.first_name, user.last_name, user.email, user.password, user.role],function(status){
+		sql = "INSERT INTO users (first_name, last_name, email, phone, password, social_link, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		db.execute(sql, [user.first_name, user.last_name, user.email, user.phone, user.password, user.social_link, user.role],function(status){
 			callback(status)
 		});
 	},
 	updateById: function(user, callback){
-		var sql = "update users set first_name=?, last_name=?, password=?, role=? where id=?";
-		db.execute(sql, [user.first_name, user.last_name, user.password, user.role, user.id],function(status){
+		var sql = "update users set first_name=?, last_name=?, phone=?, password=?, social_link=?,role=? where id=?";
+		db.execute(sql, [user.first_name, user.last_name, user.phone, user.password, user.social_link,user.role, user.id],function(status){
 			callback(status)
 		});
 	},
 
 	updateByEmail: function(user, callback){
-		var sql = "update users set first_name=?, last_name=?, password=?, role=? where email=?";
-		db.execute(sql, [user.first_name, user.last_name, user.password, user.role, user.email], function(status){
+		var sql = "update users set first_name=?, last_name=?, phone=?,password=?, social_link=?,role=? where email=?";
+		db.execute(sql, [user.first_name, user.last_name, user.phone, user.password, user.social_link, user.role, user.email], function(status){
 			callback(status)
 		});
 	},

@@ -57,6 +57,7 @@ app.get('/', (req, res) => {
     user = {
         user_id: req.session.user_id,
         email: req.session.email,
+        phone: req.session.phone,
         first_name: req.session.first_name,
         last_name: req.session.last_name,
         role: req.session.role,
