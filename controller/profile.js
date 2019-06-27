@@ -14,9 +14,19 @@ router.get('*', (req, res, next) => {
 });
 
 
-router.get('/', (req, res) => {
-    res.render('profile', {page: 'Profile', menuId:'profile'});
+router.get('/:id', (req, res) => {
+    user.getById(req.params.id,(result) => {
+        res.render('profile', {page: 'Profile', menuId:'profile', result: result[0]});
+    });
 });
+
+
+
+// router.get('/edit/:id', function(req, res){
+//     user.getById(req.params.id, function(result){
+//         res.render('home/edit', {user: result[0]});
+//     });
+// });
 
 
 // router.post('/', (req, res) => {

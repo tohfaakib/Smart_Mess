@@ -53,9 +53,13 @@ app.use(function (req, res, next) {
 
 
 // Routing
-app.get('/', (request, response) => {
-    // response.send("Welcome");
-    response.render('home/index', {page: 'Home', menuId:'home'});
+app.get('/', (req, res) => {
+    if (req.session.id != null) {
+        res.render('home/index', {page: 'Home', menuId:'home', user_id: req.session.user_id});
+    } else {
+        res.render('home/index', {page: 'Home', menuId:'home', user_id: null});
+    }
+
 });
 
 
