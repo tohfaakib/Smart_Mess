@@ -15,9 +15,14 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/:id', (req, res) => {
-    user.getById(req.params.id,(result) => {
-        res.render('profile', {page: 'Profile', menuId:'profile', result: result[0]});
-    });
+    if (req.session.user_id == req.params.id) {
+        user.getById(req.params.id,(result) => {
+            res.render('profile', {page: 'Profile', menuId:'profile', result: result[0]});
+        });
+    } else {
+        res.redirect('/profile/'+req.session.user_id);
+    }
+
 });
 
 

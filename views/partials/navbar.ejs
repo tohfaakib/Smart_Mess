@@ -13,9 +13,9 @@
                 <li id="home"><a href="/">HOME</a></li>
                 <li id="about"><a href="/about">ABOUT US</a></li>
                 <li id="contact"><a href="/contact">CONTACT US</a></li>
-                <% if(locals.loggedin){ %>
+                <% if(user.user_id){ %>
                     <li id=""><a href="/logout">LOGOUT</a></li>
-<!--                    <li id=""><a href="/profile/<%= //user.user_id %>"><%= user.first_name + " " + user.last_name %></a></li>-->
+<!--                    <li id=""><a href="/profile/<%= user.user_id %>"><%= user.first_name + " " + user.last_name %></a></li>-->
                 <% } else{ %>
                     <li id=""><a href="/login">LOGIN</a></li>
                     <li id=""><a href="/signup">SIGN UP</a></li>

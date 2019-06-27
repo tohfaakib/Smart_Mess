@@ -13,15 +13,20 @@ router.get('/', (req, res, next) => {
 
 router.get('/', (req, res) => {
     req.session.email = null;
-    req.session.fullname = null;
+    req.session.user_id = null;
+    req.session.first_name = null;
+    req.session.last_name= null;
+    req.session.role= null;
 
-    req.app.locals = {
-        loggedin: null,
-        fullname: null
+    user = {
+        user_id: null,
+        email: null,
+        first_name: null,
+        last_name: null,
+        role: null,
     };
 
     res.redirect('/login');
-
 
 });
 

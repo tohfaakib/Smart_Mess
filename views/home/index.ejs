@@ -2,8 +2,8 @@
 <% include ../partials/navbar %>
 
 
-<% if(locals.loggedin){ %>
-    <% if(locals.role === 'Manager'){ %>
+<% if(user.user_id){ %>
+    <% if(user.role === 'Manager'){ %>
         <% include ../partials/manager-home %>
     <% } else{ %>
         <% include ../partials/member-home %>

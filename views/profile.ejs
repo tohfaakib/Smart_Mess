@@ -19,7 +19,7 @@
                         <%= result.first_name +" "+result.last_name %>
                     </h5>
                     <h6>
-                        <%= locals.role %>
+                        <%= result.role %>
                     </h6>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -56,7 +56,7 @@
                                     <label>User Id</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Kshiti123</p>
+                                    <p><%= result.id %></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -64,7 +64,7 @@
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Kshiti Ghelani</p>
+                                    <p><%= result.first_name +" "+result.last_name %></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -72,7 +72,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>kshitighelani@gmail.com</p>
+                                    <p><%= result.email %></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -85,10 +85,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Profession</label>
+                                    <label>Role</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Web Developer and Designer</p>
+                                    <p><%= result.role %></p>
                                 </div>
                             </div>
                         </div>
