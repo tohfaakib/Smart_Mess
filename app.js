@@ -16,6 +16,10 @@ var logout = require('./controller/logout');
 var about = require('./controller/about');
 var contact = require('./controller/contact');
 
+
+
+
+
 // config
 
 app.set('view engine', 'ejs');

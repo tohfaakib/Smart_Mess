@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-var user = require.main.require('./models/user-model');
+var user_db = require.main.require('./models/user-model');
 
 
 router.get('*', (req, res, next) => {
@@ -37,8 +37,8 @@ router.post('/', (req, res) => {
         data = {
             email: req.body.email,
             password: req.body.password
-        }
-        user.getByEmailPass(data, (result) => {
+        };
+        user_db.getByEmailPass(data, (result) => {
             if (result.length > 0) {
                 req.session.user_id = result[0].id;
                 req.session.email = req.body.email;

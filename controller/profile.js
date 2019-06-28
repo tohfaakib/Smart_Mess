@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-var user = require.main.require('./models/user-model');
+var user_db = require.main.require('./models/user-model');
 
 
 router.get('*', (req, res, next) => {
@@ -16,7 +16,7 @@ router.get('*', (req, res, next) => {
 
 router.get('/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
-        user.getById(req.params.id,(result) => {
+        user_db.getById(req.params.id,(result) => {
             res.render('profile', {page: 'Profile', menuId:'profile', result: result[0]});
         });
     } else {
@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/edit/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
-        user.getById(req.params.id,(result) => {
+        user_db.getById(req.params.id,(result) => {
             res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: null, phone_exist: null, result: result[0]});
         });
     } else {
@@ -64,7 +64,7 @@ update = (req, res, results) => {
             social_link: req.body.social_link
         };
 
-        user.updateById(data, (result) => {
+        user_db.updateById(data, (result) => {
             if (result) {
                 res.redirect('/profile/'+req.params.id);
             } else {
@@ -78,14 +78,14 @@ update = (req, res, results) => {
 router.post('/edit/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
 
-        user.getById(req.params.id,(results) => {
+        user_db.getById(req.params.id,(results) => {
 
 
             var data = {
                 email: req.body.email
             };
 
-            user.getByEmail(data, (result) => {
+            user_db.getByEmail(data, (result) => {
                 if (result.length > 0 && results[0].id !== result[0].id) {
                     res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: 'yes', phone_exist: null, result: results[0]});
                 }
@@ -93,7 +93,7 @@ router.post('/edit/:id', (req, res) => {
                     var data = {
                         phone: req.body.phone
                     };
-                    user.getByPhone(data, (result) => {
+                    user_db.getByPhone(data, (result) => {
                         if (result.length > 0 && results[0].id !== result[0].id) {
                             res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: null, phone_exist: 'yes', result: results[0]});
                         } else {

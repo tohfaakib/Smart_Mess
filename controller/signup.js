@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var user = require.main.require('./models/user-model');
+var user_db = require.main.require('./models/user-model');
 
 
 router.get('*', (req, res, next) => {
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
             email: req.body.email
         };
 
-        user.getByEmail(data, (result) => {
+        user_db.getByEmail(data, (result) => {
             if (result.length > 0) {
                 res.render('signup', {page: 'SignUp', menuId:'signup', pass_mismatch: null, email_exist: 'yes', phone_exist: null});
             }
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
                 var data = {
                     phone: req.body.phone
                 };
-                user.getByPhone(data, (result) => {
+                user_db.getByPhone(data, (result) => {
                     if (result.length > 0) {
                         res.render('signup', {page: 'SignUp', menuId:'signup', pass_mismatch:null, email_exist:null, phone_exist: 'yes'});
                     } else {
@@ -60,10 +60,11 @@ router.post('/', (req, res) => {
                                 email: req.body.email,
                                 phone: req.body.phone,
                                 password: req.body.password,
-                                role: req.body.role
+                                role: req.body.role,
+                                social_link: req.body.social_link
                             };
 
-                            user.insert(data, (result) => {
+                            user_db.insert(data, (result) => {
                                 if (result) {
                                     res.redirect('/login');
                                 } else {
