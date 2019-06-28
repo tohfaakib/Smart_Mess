@@ -52,7 +52,7 @@ router.post('/edit/:id', (req, res) => {
 
             user.getByEmail(data, (result) => {
                 if (result.length > 0) {
-                    res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: 'yes', phone_exist: null});
+                    res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: 'yes', phone_exist: null, result: results[0]});
                 }
                 else {
                     var data = {
@@ -60,7 +60,7 @@ router.post('/edit/:id', (req, res) => {
                     };
                     user.getByPhone(data, (result) => {
                         if (result.length > 0) {
-                            res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: null, phone_exist: 'yes'});
+                            res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: null, phone_exist: 'yes', result: results[0]});
                         } else {
                             req.checkBody('first_name', '*First Name field cannot be empty!').notEmpty();
                             req.checkBody('last_name', '*Last Name field cannot be empty!').notEmpty();
@@ -73,7 +73,7 @@ router.post('/edit/:id', (req, res) => {
                             const err = req.validationErrors();
 
                             if (err){
-                                res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: 'yes', phone_exist: null, errors: err});
+                                res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: 'yes', phone_exist: null, errors: err, result: results[0]});
                             } else {
                                 var data = {
                                     id: req.params.id,
@@ -102,26 +102,6 @@ router.post('/edit/:id', (req, res) => {
 
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        user.updateById(req.params.id,(result) => {
-            // console.log(result);
-            res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: null, phone_exist: null, result: result[0]});
-        });
     } else {
         res.redirect('/profile/edit/'+req.session.user_id);
     }
