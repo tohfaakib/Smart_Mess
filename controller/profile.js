@@ -118,6 +118,19 @@ router.post('/edit/:id', (req, res) => {
 
 
 
+router.get('/change-password/:id', (req, res) => {
+    if (req.session.user_id == req.params.id) {
+        user_db.getById(req.params.id,(result) => {
+            res.render('edit_profile', {page: 'Edit Profile', menuId:'profile', email_exist: null, phone_exist: null, result: result[0]});
+        });
+    } else {
+        res.redirect('/profile/edit/'+req.session.user_id);
+    }
+
+});
+
+
+
 
 
 

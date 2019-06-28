@@ -40,20 +40,6 @@ app.use('/about', about);
 app.use('/contact', contact);
 
 
-// make the data global for ejs template
-// app.use(function (req, res, next) {
-//
-//
-//         app.locals = {
-//             loggedin: req.session.email,
-//             fullname: req.session.fullname,
-//             role: req.session.role,
-//         };
-//
-//
-//     next();
-// });
-
 
 
 // Routing
