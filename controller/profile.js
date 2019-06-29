@@ -121,7 +121,7 @@ router.post('/edit/:id', (req, res) => {
 router.get('/change-password/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
         user_db.updateById(req.params.id,(result) => {
-            res.render('change_password', {page: 'Change Password', menuId:'Change_Pass', result: result[0]});
+            res.render('change_password', {page: 'Change Password', menuId:'change_pass', invalid_pass: null, pass_mismatch: null, result: result[0]});
         });
     } else {
         res.redirect('/profile/edit/'+req.session.user_id);
@@ -150,11 +150,11 @@ router.post('/change-password/:id', (req, res) => {
                 });
             }
             else {
-                res.send("New Password don't match with Confirm Password");
+                res.render('change_password', {page: 'Change Password', menuId:'change_pass',invalid_pass: null, pass_mismatch:'yes', result: result[0]});
             }
         }
         else
-            res.send("Invalid Current Password");
+            res.render('change_password', {page: 'Change Password', menuId:'change_pass',invalid_pass:'yes', pass_mismatch:null, result: result[0]});
     });
 
 
