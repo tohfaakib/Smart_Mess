@@ -120,8 +120,8 @@ router.post('/edit/:id', (req, res) => {
 
 router.get('/change-password/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
-        user_db.getById(req.params.id,(result) => {
-            res.render('change_password', {page: 'Edit Profile', menuId:'profile', result: result[0]});
+        user_db.updateById(req.params.id,(result) => {
+            res.render('change_password', {page: 'Change Password', menuId:'Change_Pass', result: result[0]});
         });
     } else {
         res.redirect('/profile/edit/'+req.session.user_id);
@@ -129,6 +129,36 @@ router.get('/change-password/:id', (req, res) => {
 
 });
 
+
+router.post('/change-password/:id', (req, res) => {
+
+    var data = {
+        id: req.params.id,
+        password: req.body.password
+    };
+    user_db.getByIdPass(data, (result) => {
+        if(result.length > 0)
+        {
+            if(req.body.new_password!=null && req.body.new_password === req.body.confirm_password) {
+                var data = {
+                    id:req.params.id,
+                    password: req.body.new_password
+                };
+                user_db.updateByIdPass(data, (result) => {
+                    //res.render('change_password', {page: 'Change Password', menuId: 'Change_Pass', result: result[0]});
+                    res.redirect("/logout");
+                });
+            }
+            else {
+                res.send("New Password don't match with Confirm Password");
+            }
+        }
+        else
+            res.send("Invalid Current Password");
+    });
+
+
+});
 
 
 

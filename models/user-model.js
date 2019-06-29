@@ -22,6 +22,13 @@ module.exports = {
 		});
 	},
 
+	getByIdPass: function(user, callback){
+		var sql = "SELECT * FROM users WHERE id=? AND password=?";
+		db.execute(sql, [user.id, user.password], function(result){
+			callback(result);
+		});
+	},
+
 	getByEmailPass: function(user, callback){
 		var sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 		db.execute(sql, [user.email, user.password], function(result){
@@ -45,6 +52,13 @@ module.exports = {
 	updateById: function(user, callback){
 		var sql = "update users set first_name=?, last_name=?, email=?, phone=?, social_link=?,role=? where id=?";
 		db.execute(sql, [user.first_name, user.last_name, user.email, user.phone, user.social_link,user.role, user.id],function(status){
+			callback(status)
+		});
+	},
+
+	updateByIdPass: function(user, callback){
+		var sql = "update users set password=? where id=?";
+		db.execute(sql, [user.password, user.id], function(status){
 			callback(status)
 		});
 	},
