@@ -73,6 +73,7 @@ router.post('/', (req, res) => {
                 });
             }
         });
+
     } else {
         res.render('signup', {page: 'SignUp', menuId:'signup', pass_mismatch:'yes'});
     }
