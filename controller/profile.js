@@ -144,8 +144,11 @@ router.post('/change-password/:id', (req, res) => {
                     password: req.body.new_password
                 };
                 user_db.updateByIdPass(data, (result) => {
-                    //res.render('change_password', {page: 'Change Password', menuId: 'Change_Pass', result: result[0]});
-                    res.redirect("/logout");
+                    if (result){
+                        res.redirect("/logout");
+                    } else {
+                        res.send("Password Has not been changed!");
+                    }
                 });
             }
             else {
