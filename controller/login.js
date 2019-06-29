@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 
 
     if(err){
-        res.render('login', {page: 'Login', menuId:'login', errors: err});
+        res.render('login', {page: 'Login', menuId:'login'});
     }else{
         data = {
             email: req.body.email,

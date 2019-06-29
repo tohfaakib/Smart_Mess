@@ -64,7 +64,13 @@
 
 
                             </label>
-                            <label style="color: red"><%if (email_exist=='yes') { %> Email Already Exists! <% } %></label>
+                            <label style="color: red">
+                                <%if(typeof email_exist != "undefined"){%>
+                                    <%if (email_exist=='yes') { %>
+                                        Email Already Exists!
+                                    <% } %>
+                                <% } %>
+                            </label>
                         </div>
 
                         <div class="form-group">
@@ -78,7 +84,13 @@
                                     <% }); %>
                                 <% } %>
                             </label>
-                            <label style="color: red"><%if (phone_exist=='yes') { %> Phone Number Already Exists! <% } %></label>
+                            <label style="color: red">
+                                <%if(typeof phone_exist != "undefined"){%>
+                                    <%if (phone_exist=='yes') { %>
+                                        Phone Number Already Exists!
+                                    <% } %>
+                                <% } %>
+                            </label>
                         </div>
 
 
