@@ -131,7 +131,6 @@ router.get('/change-password/:id', (req, res) => {
 
 
 router.post('/change-password/:id', (req, res) => {
-
     var data = {
         id: req.params.id,
         password: req.body.password
