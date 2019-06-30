@@ -15,7 +15,7 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-        res.render('login', {page: 'Login', menuId:'login'});
+    res.render('login', {page: 'Login', menuId: 'login'});
 });
 
 
@@ -31,9 +31,9 @@ router.post('/', (req, res) => {
     const err = req.validationErrors();
 
 
-    if(err){
-        res.render('login', {page: 'Login', menuId:'login', errors: err});
-    }else{
+    if (err) {
+        res.render('login', {page: 'Login', menuId: 'login', errors: err});
+    } else {
         data = {
             email: req.body.email,
             password: req.body.password
@@ -43,8 +43,8 @@ router.post('/', (req, res) => {
                 req.session.user_id = result[0].id;
                 req.session.email = req.body.email;
                 req.session.first_name = result[0].first_name;
-                req.session.last_name= result[0].last_name;
-                req.session.role= result[0].role;
+                req.session.last_name = result[0].last_name;
+                req.session.role = result[0].role;
 
                 res.redirect('/');
             } else {
@@ -52,7 +52,6 @@ router.post('/', (req, res) => {
             }
         });
     }
-
 
 
 });

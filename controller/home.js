@@ -2,9 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 
-
-
-
 // router.get('*', (req, res, next) => {
 //     if (req.session.email == null) {
 //         next();
@@ -15,11 +12,8 @@ var router = express.Router();
 
 
 router.get('/', (req, res) => {
-        res.render('home/index', {page: 'Dashboard', menuId:'dashboard'});
+    res.render('home/index', {page: 'Dashboard', menuId: 'dashboard'});
 });
-
-
-
 
 
 module.exports = router;

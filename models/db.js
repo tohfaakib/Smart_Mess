@@ -1,17 +1,17 @@
 var mysql = require('mysql');
 
 var config = {
-    host     : 'localhost',
-    user     : 'root',
-    password : '',
-    database : 'mess'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'mess'
 };
 
 var getConnection = function (callback) {
     var connection = mysql.createConnection(config);
 
     connection.connect(function (err) {
-        if (err){
+        if (err) {
             console.log(`Connection error with message: ${err}`);
         } else {
             console.log(`Connected as, ${connection.threadId}`);
@@ -23,10 +23,10 @@ var getConnection = function (callback) {
 
 module.exports = {
     execute: (sql, params, callback) => {
-        if (params !== ""){
+        if (params !== "") {
             getConnection((connection) => {
                 connection.query(sql, params, (err, res) => {
-                    if (err){
+                    if (err) {
                         console.log(`Error with message, ${err}`)
                     } else {
                         callback(res);
@@ -44,7 +44,7 @@ module.exports = {
         } else if (params === "") {
             getConnection((connection) => {
                 connection.query(sql, (err, res) => {
-                    if (err){
+                    if (err) {
                         console.log(`Error with message, ${err}`)
                     } else {
                         callback(res);

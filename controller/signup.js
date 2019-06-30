@@ -13,7 +13,7 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    res.render('signup', {page: 'SignUp', menuId:'signup'});
+    res.render('signup', {page: 'SignUp', menuId: 'signup'});
 });
 
 
@@ -26,14 +26,13 @@ router.post('/', (req, res) => {
         user_db.getByEmail(data, (result) => {
             if (result.length > 0) {
                 res.render('signup', {page: 'SignUp', email_exist: 'yes'});
-            }
-            else {
+            } else {
                 var data = {
                     phone: req.body.phone
                 };
                 user_db.getByPhone(data, (result) => {
                     if (result.length > 0) {
-                        res.render('signup', {page: 'SignUp', menuId:'signup', phone_exist: 'yes'});
+                        res.render('signup', {page: 'SignUp', menuId: 'signup', phone_exist: 'yes'});
                     } else {
                         req.checkBody('first_name', '*First Name field cannot be empty!').notEmpty();
                         req.checkBody('last_name', '*Last Name field cannot be empty!').notEmpty();
@@ -48,8 +47,8 @@ router.post('/', (req, res) => {
 
                         const err = req.validationErrors();
 
-                        if (err){
-                            res.render('signup', {page: 'SignUp', menuId:'signup', errors: err});
+                        if (err) {
+                            res.render('signup', {page: 'SignUp', menuId: 'signup', errors: err});
                         } else {
                             var data = {
                                 first_name: req.body.first_name,
@@ -75,7 +74,7 @@ router.post('/', (req, res) => {
         });
 
     } else {
-        res.render('signup', {page: 'SignUp', menuId:'signup', pass_mismatch:'yes'});
+        res.render('signup', {page: 'SignUp', menuId: 'signup', pass_mismatch: 'yes'});
     }
 });
 

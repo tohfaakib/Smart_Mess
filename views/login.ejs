@@ -16,25 +16,27 @@
                     <form role="form" method="post">
 
                         <div class="form-group">
-                            <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                            <input type="text" name="email" id="email" class="form-control input-sm"
+                                   placeholder="Email Address">
                             <label style="color: red">
-                                <%if(typeof errors != "undefined"){%>
+                                <% if(typeof errors != "undefined"){ %>
                                     <% errors.forEach(function(err){ %>
-                                        <%if(err.param == "email"){%>
-                                            <%=err.msg%> <br/>
-                                        <% } %>
+                                    <% if(err.param == "email"){ %>
+                                    <%= err.msg %> <br/>
+                                    <% } %>
                                     <% }); %>
                                 <% } %>
                             </label>
                         </div>
 
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                            <input type="password" name="password" id="password" class="form-control input-sm"
+                                   placeholder="Password">
                             <label style="color: red">
-                                <%if(typeof errors != "undefined"){%>
+                                <% if(typeof errors != "undefined"){ %>
                                     <% errors.forEach(function(err){ %>
-                                    <%if(err.param == "password"){%>
-                                    <%=err.msg%> <br/>
+                                    <% if(err.param == "password"){ %>
+                                    <%= err.msg %> <br/>
                                     <% } %>
                                     <% }); %>
                                 <% } %>
@@ -51,8 +53,6 @@
     </div>
 
 </div>
-
-
 
 
 <% include ./partials/footer %>

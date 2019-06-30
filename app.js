@@ -17,9 +17,6 @@ var about = require('./controller/about');
 var contact = require('./controller/contact');
 
 
-
-
-
 // config
 
 app.set('view engine', 'ejs');
@@ -27,7 +24,7 @@ app.set('view engine', 'ejs');
 
 // middleware
 app.use(bodyParser.urlencoded({'extended': false}));
-app.use(expressSession({secret:'secret_pass', saveUninitialized:true, resave:false}));
+app.use(expressSession({secret: 'secret_pass', saveUninitialized: true, resave: false}));
 app.use(exValidator());
 app.use('/static', express.static('static'));
 
@@ -38,8 +35,6 @@ app.use('/signup', signup);
 app.use('/logout', logout);
 app.use('/about', about);
 app.use('/contact', contact);
-
-
 
 
 // Routing
@@ -53,18 +48,17 @@ app.get('/', (req, res) => {
         role: req.session.role,
     };
     if (req.session.id != null) {
-        res.render('home/index', {page: 'Home', menuId:'home', user});
+        res.render('home/index', {page: 'Home', menuId: 'home', user});
     } else {
-        res.render('home/index', {page: 'Home', menuId:'home', user: null});
+        res.render('home/index', {page: 'Home', menuId: 'home', user: null});
     }
 
 });
 
 
-
 //Server Startup
 app.listen(port, () => {
     console.log(`Server Started at, http://127.0.0.1:${port}`);
-})
+});
 
 

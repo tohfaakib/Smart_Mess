@@ -19,12 +19,13 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                                    <input type="text" name="first_name" id="first_name" class="form-control input-sm"
+                                           placeholder="First Name">
                                     <label style="color: red">
-                                        <%if(typeof errors != "undefined"){%>
+                                        <% if(typeof errors != "undefined"){ %>
                                             <% errors.forEach(function(err){ %>
-                                            <%if(err.param == "first_name"){%>
-                                            <%=err.msg%> <br/>
+                                            <% if(err.param == "first_name"){ %>
+                                            <%= err.msg %> <br/>
                                             <% } %>
                                             <% }); %>
                                         <% } %>
@@ -35,12 +36,13 @@
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                    <input type="text" name="last_name" id="last_name" class="form-control input-sm"
+                                           placeholder="Last Name">
                                     <label style="color: red">
-                                        <%if(typeof errors != "undefined"){%>
+                                        <% if(typeof errors != "undefined"){ %>
                                             <% errors.forEach(function(err){ %>
-                                            <%if(err.param == "last_name"){%>
-                                            <%=err.msg%> <br/>
+                                            <% if(err.param == "last_name"){ %>
+                                            <%= err.msg %> <br/>
                                             <% } %>
                                             <% }); %>
                                         <% } %>
@@ -51,41 +53,43 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                            <input type="" name="email" id="email" class="form-control input-sm"
+                                   placeholder="Email Address">
                             <label style="color: red">
-                                <%if(typeof errors != "undefined"){%>
+                                <% if(typeof errors != "undefined"){ %>
                                     <% errors.forEach(function(err){ %>
-                                    <%if(err.param == "email"){%>
-                                    <%=err.msg%> <br/>
+                                    <% if(err.param == "email"){ %>
+                                    <%= err.msg %> <br/>
                                     <% } %>
                                     <% }); %>
                                 <% } %>
                             </label>
                             <label style="color: red">
-                                <%if(typeof email_exist != "undefined"){%>
-                                    <%if (email_exist=='yes') { %>
-                                        Email Already Exists!
-                                    <% } %>
+                                <% if(typeof email_exist != "undefined"){ %>
+                                <% if (email_exist == 'yes') { %>
+                                    Email Already Exists!
+                                <% } %>
                                 <% } %>
                             </label>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="phone" id="phone" class="form-control input-sm" placeholder="Phone">
+                            <input type="text" name="phone" id="phone" class="form-control input-sm"
+                                   placeholder="Phone">
                             <label style="color: red">
-                                <%if(typeof errors != "undefined"){%>
+                                <% if(typeof errors != "undefined"){ %>
                                     <% errors.forEach(function(err){ %>
-                                    <%if(err.param == "phone"){%>
-                                    <%=err.msg%> <br/>
+                                    <% if(err.param == "phone"){ %>
+                                    <%= err.msg %> <br/>
                                     <% } %>
                                     <% }); %>
                                 <% } %>
                             </label>
                             <label style="color: red">
-                                <%if(typeof phone_exist != "undefined"){%>
-                                    <%if (phone_exist=='yes') { %>
-                                        Phone Number Already Exists!
-                                    <% } %>
+                                <% if(typeof phone_exist != "undefined"){ %>
+                                <% if (phone_exist == 'yes') { %>
+                                    Phone Number Already Exists!
+                                <% } %>
                                 <% } %>
                             </label>
                         </div>
@@ -93,13 +97,14 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                    <input type="password" name="password" id="password" class="form-control input-sm"
+                                           placeholder="Password">
                                     <label style="color: red">
-                                        <%if(typeof errors != "undefined"){%>
+                                        <% if(typeof errors != "undefined"){ %>
                                             <% errors.forEach(function(err){ %>
-                                            <%if(err.param == "password"){%>
-                                            <%if(err.param == "password"){%>
-                                                <%=err.msg%> <br/>
+                                            <% if(err.param == "password"){ %>
+                                            <% if(err.param == "password"){ %>
+                                            <%= err.msg %> <br/>
                                             <% } %>
                                             <% } %>
                                             <% }); %>
@@ -110,12 +115,13 @@
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                                    <input type="password" name="password_confirmation" id="password_confirmation"
+                                           class="form-control input-sm" placeholder="Confirm Password">
                                     <label style="color: red">
-                                        <%if(typeof errors != "undefined"){%>
+                                        <% if(typeof errors != "undefined"){ %>
                                             <% errors.forEach(function(err){ %>
-                                            <%if(err.param == "password_confirmation"){%>
-                                            <%=err.msg%> <br/>
+                                            <% if(err.param == "password_confirmation"){ %>
+                                            <%= err.msg %> <br/>
                                             <% } %>
                                             <% }); %>
                                         <% } %>
@@ -124,10 +130,10 @@
 
                                 <div>
                                     <label style="color: red">
-                                        <%if(typeof pass_mismatch != "undefined"){%>
-                                            <%if (pass_mismatch == 'yes') { %>
-                                                Password didn't match!
-                                            <% } %>
+                                        <% if(typeof pass_mismatch != "undefined"){ %>
+                                        <% if (pass_mismatch == 'yes') { %>
+                                            Password didn't match!
+                                        <% } %>
                                         <% } %>
                                     </label>
                                 </div>
@@ -136,12 +142,13 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="social_link" id="social_link" class="form-control input-sm" placeholder="Socail Link (Optional)">
+                            <input type="text" name="social_link" id="social_link" class="form-control input-sm"
+                                   placeholder="Socail Link (Optional)">
                             <label style="color: red">
-                                <%if(typeof errors != "undefined"){%>
+                                <% if(typeof errors != "undefined"){ %>
                                     <% errors.forEach(function(err){ %>
-                                    <%if(err.param == "social_link"){%>
-                                    <%=err.msg%> <br/>
+                                    <% if(err.param == "social_link"){ %>
+                                    <%= err.msg %> <br/>
                                     <% } %>
                                     <% }); %>
                                 <% } %>
@@ -149,17 +156,17 @@
                         </div>
 
                         <select class="form-control input-sm" name="role" id="role">
-                            <option  type="text" value="">Select Your Role</option>
+                            <option type="text" value="">Select Your Role</option>
                             <option type="text" value="Manager">Manager</option>
                             <option type="text" value="Member">Member</option>
 
 
                         </select><br>
                         <label style="color: red">
-                            <%if(typeof errors != "undefined"){%>
+                            <% if(typeof errors != "undefined"){ %>
                                 <% errors.forEach(function(err){ %>
-                                <%if(err.param == "role"){%>
-                                <%=err.msg%> <br/>
+                                <% if(err.param == "role"){ %>
+                                <%= err.msg %> <br/>
                                 <% } %>
                                 <% }); %>
                             <% } %>
@@ -174,8 +181,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <% include partials/script %>
