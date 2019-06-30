@@ -131,35 +131,56 @@ router.get('/change-password/:id', (req, res) => {
 
 
 router.post('/change-password/:id', (req, res) => {
-    var data = {
-        id: req.params.id,
-        password: req.body.password
-    };
-    user_db.getByIdPass(data, (result) => {
-        if(result.length > 0)
-        {
-            if(req.body.new_password!=null && req.body.new_password === req.body.confirm_password) {
-                var data = {
-                    id:req.params.id,
-                    password: req.body.new_password
-                };
-                user_db.updateByIdPass(data, (result) => {
-                    if (result){
-                        res.redirect("/logout");
-                    } else {
-                        res.send("Password Has not been changed!");
-                    }
+    req.checkBody('password', '*Password field cannot be empty!').notEmpty();
+    req.checkBody('new_password', '*New Password field cannot be empty!').notEmpty();
+    req.checkBody('confirm_password', '*Confirm New Password field cannot be empty!').notEmpty();
+
+    const err = req.validationErrors();
+
+    if(err){
+        res.render('change_password', {
+            page: 'Change Password',
+            menuId: 'change_pass',
+            errors: err
+        });
+    }else {
+
+        var data = {
+            id: req.params.id,
+            password: req.body.password
+        };
+        user_db.getByIdPass(data, (result) => {
+            if (result.length > 0) {
+                if (req.body.new_password != null && req.body.new_password === req.body.confirm_password) {
+                    var data = {
+                        id: req.params.id,
+                        password: req.body.new_password
+                    };
+                    user_db.updateByIdPass(data, (result) => {
+                        if (result) {
+                            res.redirect("/logout");
+                        } else {
+                            res.send("Password Has not been changed!");
+                        }
+                    });
+                } else {
+                    res.render('change_password', {
+                        page: 'Change Password',
+                        menuId: 'change_pass',
+                        pass_mismatch: 'yes',
+                        result: result[0]
+                    });
+                }
+            } else
+                res.render('change_password', {
+                    page: 'Change Password',
+                    menuId: 'change_pass',
+                    invalid_pass: 'yes',
+                    result: result[0]
                 });
-            }
-            else {
-                res.render('change_password', {page: 'Change Password', menuId:'change_pass',invalid_pass: null, pass_mismatch:'yes', result: result[0]});
-            }
-        }
-        else
-            res.render('change_password', {page: 'Change Password', menuId:'change_pass',invalid_pass:'yes', pass_mismatch:null, result: result[0]});
-    });
+        });
 
-
+    }
 });
 
 
