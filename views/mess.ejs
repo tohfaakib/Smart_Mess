@@ -4,7 +4,11 @@
 
 <br>
 <a href="/mess/members/<%= user.mess_id %>" class="view btn-sm active">View Member</a>
-<a href="/mess/invite/<%= user.mess_id %>" class="view btn-sm active">Invite Member</a>
+
+<% if (user.role != "Member") { %>
+    <a href="/mess/invite/<%= user.mess_id %>" class="view btn-sm active">Invite Member</a>
+<% } %>
+
 <br><br><br>
 
 

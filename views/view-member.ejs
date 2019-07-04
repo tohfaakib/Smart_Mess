@@ -5,7 +5,12 @@
 <h2> Member List: </h2>
 
 <% for(var i=0; i < result.length; i++) { %>
-    <p><%= result[i].first_name + " " + result[i].last_name %></p>
+
+        <% if (result[i].status != 'invited') { %>
+            <p><%= result[i].first_name + " " + result[i].last_name %></p>
+        <% } %>
+
+
 <% } %>
 
 <% include ./partials/footer %>

@@ -14,38 +14,114 @@ router.get('*', (req, res, next) => {
     }
 });
 
+router.get('/create', (req, res) => {
+    if(req.session.role == "Manager") {
+        if (req.session.mess_id == null || req.session.mess_id == '') {
+            res.render('create-mess', {page: 'Create Mess', menuId: 'create-mess'});
+        } else {
+            res.redirect('/');
+        }
+    }else {
+        res.redirect('/');
+    }
+});
 
-// router.get('/', (req, res) => {
-//     res.render('mess', {page: 'Mess', menuId: 'mess'});
-// });
+
 
 
 router.get('/:id', (req, res) => {
-    res.render('mess', {page: 'Mess', menuId: 'mess'});
+    if(req.session.status != "invited" && (req.session.mess_id != null || req.session.mess_id != '')) {
+        res.render('mess', {page: 'Mess', menuId: 'mess'});
+    }else {
+        res.redirect('/');
+    }
 
 });
 
 
 router.get('/members/:id', (req, res) => {
-    data = {
-        mess_id: req.params.id,
-    };
-    user_db.getAllByMessId(data, (result) => {
-        console.log(result);
-        res.render('view-member', {page: 'Members', menuId: 'mess', result: result});
-    });
+    if(req.session.status != "invited" && (req.session.mess_id != null || req.session.mess_id != '')){
+        data = {
+            mess_id: req.params.id,
+        };
+        user_db.getAllByMessId(data, (result) => {
+            res.render('view-member', {page: 'Members', menuId: 'mess', result: result});
+        });
+    }else {
+        res.redirect('/');
+    }
 
 
 });
 
 
+
+router.get('/invitation/:id', (req, res) => {
+    mess_db.getByMessId(req.params.id, (result) => {
+        console.log(result);
+        res.render('invitation', {page: 'Invitation', menuId: 'mess', result: result[0]});
+    });
+});
+
+
+router.get('/accept/:id', (req, res) => {
+
+    data = {
+        email: req.session.email,
+        status: null,
+    };
+    user_db.updateOnlyStatus(data, (result) => {
+        if (result) {
+
+            req.session.status = '';
+            user = {
+              status: req.session.status,
+            };
+
+            res.redirect('/');
+        } else {
+            res.send("Cannot Accept!");
+        }
+    });
+
+});
+
+
+router.get('/cancel/:id', (req, res) => {
+
+    data = {
+        email: req.session.email,
+        mess_id: null,
+        status: null,
+    };
+
+    user_db.updateByStatus(data, (result) => {
+        console.log(result);
+        if (result) {
+            req.session.status = null;
+            user = {
+                status: req.session.status,
+            };
+            res.redirect('/');
+        } else {
+            res.send("Cannot Cancel");
+        }
+    });
+
+});
+
+
+
 router.get('/invite/:id', (req, res) => {
+    if(req.session.role != "Member") {
         res.render('invite-member', {page: 'Invite Members', menuId: 'mess'});
+    }else {
+        res.redirect('/');
+    }
 });
 
 
 router.post('/invite/:id', (req, res) => {
-    console.log(req.body.member_email);
 
     data = {
         email: req.body.member_email,
@@ -55,9 +131,10 @@ router.post('/invite/:id', (req, res) => {
 
     user_db.updateByStatus(data, (result) => {
         if (result) {
+
             res.redirect('/mess/'+data.mess_id);
         } else {
-            res.send("Cannot Invite!")
+            res.send("Cannot Invite!");
         }
     });
 
@@ -69,9 +146,6 @@ router.post('/invite/:id', (req, res) => {
 
 
 
-router.get('/create', (req, res) => {
-    res.render('create-mess', {page: 'Create Mess', menuId: 'create-mess'});
-});
 
 
 router.post('/create', (req, res) => {
@@ -110,7 +184,7 @@ router.post('/create', (req, res) => {
                                   mess_id: req.session.mess_id,
                                 };
 
-                                res.redirect('/mess/'+data.mess_id);
+                                res.redirect('/');
                             } else {
                                 res.send("Unexpected error occurred!")
                             }
@@ -122,9 +196,6 @@ router.post('/create', (req, res) => {
             }
         });
     }
-
-
-
 
 
 });
