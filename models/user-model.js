@@ -43,6 +43,15 @@ module.exports = {
             callback(results);
         });
     },
+
+    getAllByMessId: function (user, callback) {
+
+        var sql = "select * from users where mess_id=?";
+        db.execute(sql, [user.mess_id], function (results) {
+            callback(results);
+        });
+    },
+
     insert: function (user, callback) {
         sql = "INSERT INTO users (first_name, last_name, email, phone, password, social_link, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
         db.execute(sql, [user.first_name, user.last_name, user.email, user.phone, user.password, user.social_link, user.role], function (status) {
@@ -55,6 +64,14 @@ module.exports = {
             callback(status)
         });
     },
+
+    updateByMessId: function (user, callback) {
+        var sql = "update users set mess_id=? where email=?";
+        db.execute(sql, [user.mess_id, user.email], function (status) {
+            callback(status)
+        });
+    },
+
 
     updateByIdPass: function (user, callback) {
         var sql = "update users set password=? where id=?";

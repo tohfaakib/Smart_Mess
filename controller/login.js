@@ -45,6 +45,7 @@ router.post('/', (req, res) => {
                 req.session.first_name = result[0].first_name;
                 req.session.last_name = result[0].last_name;
                 req.session.role = result[0].role;
+                req.session.mess_id = result[0].mess_id;
 
                 res.redirect('/');
             } else {

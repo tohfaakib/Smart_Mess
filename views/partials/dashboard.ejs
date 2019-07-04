@@ -7,7 +7,7 @@
                 <ul>
                     <li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i><span
                                     class="hidden-xs hidden-sm">Home</span></a></li>
-                    <li><a href="/mess"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">View Mess</span></a>
+                    <li><a href="/mess/<%= user.mess_id %>"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Mess</span></a>
                     </li>
                     <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Statistics</span></a>
                     </li>
@@ -47,15 +47,17 @@
                                 <% if(user.role == 'Manager'){ %>
 
 
-                                    <li>
-                                        <a href="/mess/create" class="view btn-sm active">Create
-                                            Mess</a>
-                                    </li>
+
+                                    <% if(user.mess_id == null){ %>
+                                        <li>
+                                            <a href="/mess/create" class="view btn-sm active">Create Mess</a>
+                                        </li>
+
+                                        <% } %>
+
 
                                 <% } else { %>
-                                    <li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal"
-                                                             data-target="#add_project">View Mess</a></li>
-                                    <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                                        <a href="/mess/members/<%= user.mess_id %>" class="view btn-sm active">Mess Invitation</a>
 
                                 <% } %>
 

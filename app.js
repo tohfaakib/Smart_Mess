@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
         first_name: req.session.first_name,
         last_name: req.session.last_name,
         role: req.session.role,
+        mess_id: req.session.mess_id,
     };
     if (req.session.id != null) {
         res.render('home/index', {page: 'Home', menuId: 'home', user});

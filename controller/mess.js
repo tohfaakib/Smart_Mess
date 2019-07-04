@@ -15,11 +15,28 @@ router.get('*', (req, res, next) => {
 });
 
 
-router.get('/', (req, res) => {
+// router.get('/', (req, res) => {
+//     res.render('mess', {page: 'Mess', menuId: 'mess'});
+// });
+
+
+router.get('/:id', (req, res) => {
     res.render('mess', {page: 'Mess', menuId: 'mess'});
+
 });
 
 
+router.get('/members/:id', (req, res) => {
+    data = {
+        mess_id: req.params.id,
+    };
+    user_db.getAllByMessId(data, (result) => {
+        console.log(result);
+        res.render('view-member', {page: 'Members', menuId: 'mess', result: result});
+    });
+
+
+});
 
 
 router.get('/create', (req, res) => {
@@ -50,7 +67,22 @@ router.post('/create', (req, res) => {
             } else {
                 mess_db.insert(data, (result) => {
                     if (result) {
-                        res.redirect('/');
+                        data = {
+                          mess_id: req.body.mess_id,
+                          email: req.session.email
+                        };
+
+                        user_db.updateByMessId(data, (result) => {
+                            if (result) {
+
+                                req.session.mess_id = data.mess_id;
+                                user = {
+                                  mess_id: req.session.mess_id,
+                                };
+
+                                res.redirect('/mess/'+data.mess_id);
+                            }
+                        });
                     } else {
                         res.send("Mess Creation failed!");
                     }
