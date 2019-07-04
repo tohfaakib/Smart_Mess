@@ -72,6 +72,13 @@ module.exports = {
         });
     },
 
+    updateByStatus: function (user, callback) {
+        var sql = "update users set mess_id=?,status=? where email=?";
+        db.execute(sql, [user.mess_id,user.status, user.email], function (status) {
+            callback(status)
+        });
+    },
+
 
     updateByIdPass: function (user, callback) {
         var sql = "update users set password=? where id=?";

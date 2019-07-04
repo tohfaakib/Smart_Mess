@@ -49,10 +49,11 @@ router.post('/invite/:id', (req, res) => {
 
     data = {
         email: req.body.member_email,
-        mess_id: req.session.mess_id+'|invited',
+        mess_id: req.session.mess_id,
+        status: "invited",
     };
 
-    user_db.updateByMessId(data, (result) => {
+    user_db.updateByStatus(data, (result) => {
         if (result) {
             res.redirect('/mess/'+data.mess_id);
         } else {
