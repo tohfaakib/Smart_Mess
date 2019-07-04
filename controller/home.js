@@ -11,8 +11,14 @@ var router = express.Router();
 // });
 
 
-router.get('/', (req, res) => {
-    res.render('home/index', {page: 'Dashboard', menuId: 'dashboard'});
+// router.get('/', (req, res) => {
+//     res.render('home/index', {page: 'Dashboard', menuId: 'dashboard'});
+// });
+
+
+
+router.post('/', (req, res) => {
+    console.log(req.body.mess_name);
 });
 
 

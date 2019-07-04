@@ -8,7 +8,7 @@ var exValidator = require('express-validator');
 var app = express();
 var port = 3000;
 
-// var home = require('./controller/home');
+var home = require('./controller/home');
 var profile = require('./controller/profile');
 var login = require('./controller/login');
 var signup = require('./controller/signup');
@@ -28,7 +28,7 @@ app.use(expressSession({secret: 'secret_pass', saveUninitialized: true, resave: 
 app.use(exValidator());
 app.use('/static', express.static('static'));
 
-// app.use('/', home);
+app.use('/', home);
 app.use('/profile', profile);
 app.use('/login', login);
 app.use('/signup', signup);
