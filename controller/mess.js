@@ -15,8 +15,12 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/create', (req, res) => {
-
     res.render('create-mess', {page: 'Create Mess', menuId: 'create-mess'});
+});
+
+
+router.post('/create', (req, res) => {
+
 });
 
 
