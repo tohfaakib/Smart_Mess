@@ -20,6 +20,25 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <input type="text" name="mess_id" id="mess_id" class="form-control input-sm" placeholder="Mess ID">
+
+                                    <label style="color: red">
+                                        <% if(typeof errors != "undefined"){ %>
+                                            <% errors.forEach(function(err){ %>
+                                                <% if(err.param == "mess_id"){ %>
+                                                    <%= err.msg %> <br/>
+                                                <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
+
+
+                                    <label style="color: red">
+                                        <% if(typeof mess_exist != "undefined"){ %>
+                                            <% if (mess_exist == 'yes') { %>
+                                                Mess Id Already Exists!
+                                            <% } %>
+                                        <% } %>
+                                    </label>
                                 </div>
 
 
@@ -27,6 +46,17 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <input type="text" name="mess_name" id="mess_name" class="form-control input-sm" placeholder="Mess Name">
+
+                                    <label style="color: red">
+                                        <% if(typeof errors != "undefined"){ %>
+                                            <% errors.forEach(function(err){ %>
+                                                <% if(err.param == "mess_name"){ %>
+                                                    <%= err.msg %> <br/>
+                                                <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                    </label>
+
                                 </div>
 
                             </div>

@@ -1,8 +1,8 @@
 var db = require('./db');
 
 module.exports = {
-    getById: function (id, callback) {
-        var sql = "select * from mess_table where id = ?";
+    getByMessId: function (id, callback) {
+        var sql = "select * from mess_table where mess_id = ?";
         db.execute(sql, [id], function (result) {
             callback(result);
         });
@@ -18,8 +18,8 @@ module.exports = {
 
     insert: function (mess, callback) {
         sql = "INSERT INTO mess_table (mess_id, name) VALUES (?, ?)";
-        db.execute(sql, [mess.mess_id, mess.name], function (status) {
-            callback(status)
+        db.execute(sql, [mess.mess_id, mess.name], function (results) {
+            callback(results)
         });
     },
     
