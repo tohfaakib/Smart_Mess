@@ -39,6 +39,35 @@ router.get('/members/:id', (req, res) => {
 });
 
 
+router.get('/invite/:id', (req, res) => {
+        res.render('invite-member', {page: 'Invite Members', menuId: 'mess'});
+});
+
+
+router.post('/invite/:id', (req, res) => {
+    console.log(req.body.member_email);
+
+    data = {
+        email: req.body.member_email,
+        mess_id: req.session.mess_id+'|invited',
+    };
+
+    user_db.updateByMessId(data, (result) => {
+        if (result) {
+            res.redirect('/mess/'+data.mess_id);
+        } else {
+            res.send("Cannot Invite!")
+        }
+    });
+
+
+
+    // res.render('invite-member', {page: 'Invite Members', menuId: 'mess'});
+});
+
+
+
+
 router.get('/create', (req, res) => {
     res.render('create-mess', {page: 'Create Mess', menuId: 'create-mess'});
 });
@@ -81,6 +110,8 @@ router.post('/create', (req, res) => {
                                 };
 
                                 res.redirect('/mess/'+data.mess_id);
+                            } else {
+                                res.send("Unexpected error occurred!")
                             }
                         });
                     } else {
