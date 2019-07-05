@@ -60,7 +60,6 @@ router.get('/invitation/:id', (req, res) => {
     if(req.session.role == "Member")
     {
         mess_db.getByMessId(req.params.id, (result) => {
-            console.log(result);
             res.render('invitation', {page: 'Invitation', menuId: 'mess', result: result[0]});
         });
     }
@@ -104,7 +103,6 @@ router.get('/cancel/:id', (req, res) => {
     };
 
     user_db.updateByStatus(data, (result) => {
-        console.log(result);
         if (result) {
             req.session.status = null;
             user = {
@@ -140,18 +138,25 @@ router.post('/invite/:id', (req, res) => {
         };
 
         user_db.getByEmail(data,(result) => {
+
             if(result){
-                console.log(result);
+                if(result[0].mess_id == null){
+                    user_db.updateByStatus(data, (result) => {
+                        if (result) {
+                            res.redirect('/mess/'+data.mess_id);
+                        } else {
+                            res.send("Cannot Invite!");
+                        }
+                    });
+                }else {
+                    res.render('invite-member', {page: 'Invite Members', menuId: 'mess', is_invited: 'yes'});
+                }
+            }else {
+                res.render('invite-member', {page: 'Invite Members', menuId: 'mess', user_exist: 'no'});
             }
         });
 
-        user_db.updateByStatus(data, (result) => {
-            if (result) {
-                res.redirect('/mess/'+data.mess_id);
-            } else {
-                res.send("Cannot Invite!");
-            }
-        });
+
     }
 
 
@@ -181,7 +186,6 @@ router.post('/create', (req, res) => {
         };
 
         mess_db.getByMessId(data.mess_id, (result) => {
-            console.log(result);
             if (result.length > 0){
                 res.render('create-mess', {page: 'Create Mess', menuId: 'create-mess', mess_exist: 'yes'})
             } else {

@@ -21,6 +21,22 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <input type="text" name="member_email" id="mess_id" class="form-control input-sm" placeholder="Enter Member's Email">
+
+                                    <label style="color: red">
+                                        <% if(typeof user_exist != "undefined"){ %>
+                                            <% if (user_exist == 'no') { %>
+                                                User Doesn't Exist!
+                                            <% } %>
+                                        <% } %>
+                                    </label>
+
+                                    <label style="color: red">
+                                        <% if(typeof is_invited != "undefined"){ %>
+                                            <% if (is_invited == 'yes') { %>
+                                                User is already invited or being added to a mess!
+                                            <% } %>
+                                        <% } %>
+                                    </label>
                                 </div>
 
                                 <input type="submit" value="Invite" class="btn btn-info btn-block">

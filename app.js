@@ -16,6 +16,7 @@ var logout = require('./controller/logout');
 var about = require('./controller/about');
 var contact = require('./controller/contact');
 var mess = require('./controller/mess');
+var expenses = require('./controller/expenses');
 
 
 // config
@@ -37,6 +38,7 @@ app.use('/logout', logout);
 app.use('/about', about);
 app.use('/contact', contact);
 app.use('/mess', mess);
+app.use('/expenses', expenses);
 
 
 // Routing
