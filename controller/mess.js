@@ -57,10 +57,18 @@ router.get('/members/:id', (req, res) => {
 
 
 router.get('/invitation/:id', (req, res) => {
-    mess_db.getByMessId(req.params.id, (result) => {
-        console.log(result);
-        res.render('invitation', {page: 'Invitation', menuId: 'mess', result: result[0]});
-    });
+    if(req.session.role == "Member")
+    {
+        mess_db.getByMessId(req.params.id, (result) => {
+            console.log(result);
+            res.render('invitation', {page: 'Invitation', menuId: 'mess', result: result[0]});
+        });
+    }
+    else
+    {
+        res.redirect("/");
+    }
+
 });
 
 
@@ -123,20 +131,28 @@ router.get('/invite/:id', (req, res) => {
 
 router.post('/invite/:id', (req, res) => {
 
-    data = {
-        email: req.body.member_email,
-        mess_id: req.session.mess_id,
-        status: "invited",
-    };
+    if(req.session.role != "Member")
+    {
+        data = {
+            email: req.body.member_email,
+            mess_id: req.session.mess_id,
+            status: "invited",
+        };
 
-    user_db.updateByStatus(data, (result) => {
-        if (result) {
+        user_db.getByEmail(data,(result) => {
+            if(result){
+                console.log(result);
+            }
+        });
 
-            res.redirect('/mess/'+data.mess_id);
-        } else {
-            res.send("Cannot Invite!");
-        }
-    });
+        user_db.updateByStatus(data, (result) => {
+            if (result) {
+                res.redirect('/mess/'+data.mess_id);
+            } else {
+                res.send("Cannot Invite!");
+            }
+        });
+    }
 
 
 
