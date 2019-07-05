@@ -17,6 +17,23 @@ router.get('/', (req, res) => {
 });
 
 
+router.get('/updated_signup/:str', (req, res) => {
+    data = {
+        email: req.params.str,
+    };
+    user_db.getByEmail(data, (result) => {
+        console.log("result",result.length);
+        if (result.length > 0) {
+            res.render('updated_signup', {page: 'SignUp', menuId: 'Signup', str:"1"});
+        } else {
+            res.render('updated_signup', {page: 'SignUp', menuId: 'Signup', str:"2"});
+        }
+    });
+
+    // return "";
+});
+
+
 router.post('/', (req, res) => {
     if (req.body.password === req.body.password_confirmation) {
         var data = {
@@ -25,7 +42,7 @@ router.post('/', (req, res) => {
 
         user_db.getByEmail(data, (result) => {
             if (result.length > 0) {
-                res.render('signup', {page: 'SignUp', email_exist: 'yes'});
+                res.render('signup', {page: 'SignUp', menuId: 'signup', email_exist: 'yes'});
             } else {
                 var data = {
                     phone: req.body.phone
