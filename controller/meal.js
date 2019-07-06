@@ -27,7 +27,21 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    res.render('meal', {page: 'Meal', menuId: 'dashboard', moment: moment});
+
+    var data={
+      email: req.session.email,
+    };
+    meal_db.getMealByDate(data,(result) => {
+
+        if(result)
+        {
+            res.render('meal', {page: 'Meal', menuId: 'dashboard', moment: moment, result: result[0]});
+        }
+        else{
+            res.redirect('/meal');
+        }
+    });
+
 });
 
 
@@ -51,7 +65,7 @@ router.post('/', (req, res) => {
         data.dinner = 1;
     }
 
-    meal_db.updateByDate(data, (result) => {
+    meal_db.updateMealByDate(data, (result) => {
         if (result) {
             res.redirect('/meal');
         } else {

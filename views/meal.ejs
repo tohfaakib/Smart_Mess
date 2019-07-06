@@ -11,15 +11,33 @@
             <form role="form" method="post">
             <div class="funkyradio">
                 <div class="funkyradio-success">
-                    <input type="checkbox" name="breakfast" id="breakfast" checked/>
+                    <input type="checkbox" name="breakfast" id="breakfast"
+                    <% if(typeof result != "undefined"){ %>
+                        <% if(result.breakfast == 1){ %>
+                           checked
+                        <% } %>
+                    <% } %>
+                    />
                     <label for="breakfast">Breakfast</label>
                 </div>
                 <div class="funkyradio-success">
-                    <input type="checkbox" name="lunch" id="lunch" checked/>
+                    <input type="checkbox" name="lunch" id="lunch"
+                    <% if(typeof result != "undefined"){ %>
+                        <% if(result.lunch == 1){ %>
+                           checked
+                                <% } %>
+                            <% } %>
+                    />
                     <label for="lunch">Lunch</label>
                 </div>
                 <div class="funkyradio-success">
-                    <input type="checkbox" name="dinner" id="dinner" checked/>
+                    <input type="checkbox" name="dinner" id="dinner"
+                    <% if(typeof result != "undefined"){ %>
+                        <% if(result.dinner == 1){ %>
+                           checked
+                                <% } %>
+                            <% } %>
+                    />
                     <label for="dinner">Dinner</label>
                 </div>
                 <input type="submit" value="Save" class="btn btn-info btn-block">
