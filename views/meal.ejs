@@ -1,0 +1,33 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+<% include ./partials/dashboard %>
+
+
+
+    <div class="col-md-4">
+
+        <div class="col-md-6">
+            <h4>Checkbox Buttons</h4>
+            <form role="form" method="post">
+            <div class="funkyradio">
+                <div class="funkyradio-success">
+                    <input type="checkbox" name="breakfast" id="breakfast" checked/>
+                    <label for="breakfast">Breakfast</label>
+                </div>
+                <div class="funkyradio-success">
+                    <input type="checkbox" name="lunch" id="lunch" checked/>
+                    <label for="lunch">Lunch</label>
+                </div>
+                <div class="funkyradio-success">
+                    <input type="checkbox" name="dinner" id="dinner" checked/>
+                    <label for="dinner">Dinner</label>
+                </div>
+                <input type="submit" value="Save" class="btn btn-info btn-block">
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+<% include ./partials/footer %>
