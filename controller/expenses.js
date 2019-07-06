@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+
 var expense_db = require.main.require('./models/expense-model');
+var foreign_db = require.main.require('./models/foreign-model');
 
 
 router.get('*', (req, res, next) => {
@@ -13,6 +15,14 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
+    var data = {
+        mess_id: req.session.mess_id,
+    };
+
+    foreign_db.getAllUsersExpensesByMessId(data, (result) => {
+        console.log(result);
+    });
+
     res.render('expenses', {page: 'Dashboard', menuId: 'dashboard'});
 });
 
