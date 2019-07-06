@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 
     var data = {
+        mess_id: req.session.mess_id,
         email: req.session.email,
         amount: req.body.amount,
         item: req.body.item,

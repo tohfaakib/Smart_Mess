@@ -17,8 +17,8 @@ module.exports = {
     },
 
     insert: function (expense, callback) {
-        sql = "INSERT INTO expenses (user_email, amount, item, date) VALUES (?, ?, ?, ?)";
-        db.execute(sql, [expense.email ,expense.amount, expense.item, expense.date], function (results) {
+        sql = "INSERT INTO expenses (user_email, mess_id, amount, item, date) VALUES (?, ?, ?, ?, ?)";
+        db.execute(sql, [expense.email, expense.mess_id, expense.amount, expense.item, expense.date], function (results) {
             callback(results)
         });
     },

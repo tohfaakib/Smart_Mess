@@ -55,8 +55,8 @@
                         <div class="form-group">
                             <input type="" name="email" id="email" class="form-control input-sm"
                                    placeholder="Email Address" onkeyup="emailValidation(this.value)">
+                            <span class="error" style="color: red;"></span>
                             <label style="color: red">
-                                <span class="error" style="color: red;"></span>
                                 <% if(typeof errors != "undefined"){ %>
                                     <% errors.forEach(function(err){ %>
                                     <% if(err.param == "email"){ %>

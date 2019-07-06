@@ -80,7 +80,7 @@ router.get('/accept/:id', (req, res) => {
     user_db.updateOnlyStatus(data, (result) => {
         if (result) {
 
-            req.session.status = '';
+            req.session.status = null;
             user = {
               status: req.session.status,
             };
