@@ -52,6 +52,15 @@ module.exports = {
         });
     },
 
+    getAllMembers: function (callback) {
+
+        var sql = "select * from users where status='' ";
+        db.execute(sql, [], function (results) {
+            callback(results);
+        });
+    },
+
+
     insert: function (user, callback) {
         sql = "INSERT INTO users (first_name, last_name, email, phone, password, social_link, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
         db.execute(sql, [user.first_name, user.last_name, user.email, user.phone, user.password, user.social_link, user.role], function (status) {
@@ -66,8 +75,8 @@ module.exports = {
     },
 
     updateByMessId: function (user, callback) {
-        var sql = "update users set mess_id=? where email=?";
-        db.execute(sql, [user.mess_id, user.email], function (status) {
+        var sql = "update users set mess_id=?, status=? where email=?";
+        db.execute(sql, [user.mess_id, user.status, user.email], function (status) {
             callback(status)
         });
     },

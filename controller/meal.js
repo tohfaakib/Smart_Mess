@@ -6,13 +6,40 @@ var ontime = require('ontime');
 
 var expense_db = require.main.require('./models/expense-model');
 var meal_db = require.main.require('./models/meal-model');
+var user_db = require.main.require('./models/user-model');
 
 
 
 ontime({
-    cycle: ['15:13:00']
+    cycle: ['18:04:00']
 }, function (ot) {
-    console.log("on time runs!")
+    console.log("on time runs!");
+
+    user_db.getAllMembers((results) => {
+        if(results){
+            for (var i =0; i < results.length; i++) {
+                data ={
+                    email: results[i].email,
+                    mess_id: results[i].mess_id,
+                    breakfast: 1,
+                    lunch: 1,
+                    dinner: 1
+                };
+
+                meal_db.insert(data, (result)=> {
+                    if (result){
+                        console.log("inserted");
+                    } else {
+                        console.log("not inserted");
+                    }
+                })
+            }
+        } else {
+            console.log("Cannot find users")
+        }
+    });
+
+
 });
 
 
@@ -51,7 +78,8 @@ router.post('/', (req, res) => {
         breakfast: 0,
         lunch: 0,
         dinner: 0,
-    }
+        email: req.session.email,
+    };
     if(req.body.breakfast == "on" )
     {
         data.breakfast = 1;

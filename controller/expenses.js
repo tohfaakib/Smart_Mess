@@ -10,12 +10,12 @@ var foreign_db = require.main.require('./models/foreign-model');
 
 
 
-
-ontime({
-    cycle: ['15:13:00']
-}, function (ot) {
-   console.log("on time runs!")
-});
+//
+// ontime({
+//     cycle: ['15:13:00']
+// }, function (ot) {
+//    console.log("on time runs!")
+// });
 
 
 

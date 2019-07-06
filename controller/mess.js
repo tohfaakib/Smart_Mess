@@ -75,12 +75,12 @@ router.get('/accept/:id', (req, res) => {
 
     data = {
         email: req.session.email,
-        status: null,
+        status: '',
     };
     user_db.updateOnlyStatus(data, (result) => {
         if (result) {
 
-            req.session.status = null;
+            req.session.status = '';
             user = {
               status: req.session.status,
             };
@@ -192,8 +192,9 @@ router.post('/create', (req, res) => {
                 mess_db.insert(data, (result) => {
                     if (result) {
                         data = {
-                          mess_id: req.body.mess_id,
-                          email: req.session.email
+                            mess_id: req.body.mess_id,
+                            email: req.session.email,
+                            status: ''
                         };
 
                         user_db.updateByMessId(data, (result) => {
