@@ -5,7 +5,6 @@ var moment = require('moment');
 var ontime = require('ontime')
 
 var expense_db = require.main.require('./models/expense-model');
-var foreign_db = require.main.require('./models/foreign-model');
 
 
 
@@ -33,7 +32,7 @@ router.get('/', (req, res) => {
         mess_id: req.session.mess_id,
     };
 
-    foreign_db.getAllUsersExpensesByMessId(data, (result) => {
+    expense_db.getAllUsersExpensesByMessId(data, (result) => {
         // console.log(result);
 
         res.render('expenses', {page: 'Dashboard', menuId: 'dashboard', result: result, moment: moment});
