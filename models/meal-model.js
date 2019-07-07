@@ -26,6 +26,14 @@ module.exports = {
         });
     },
 
+    getMealByTomorrow: function (data, callback) {
+
+        var sql = "select * from meal where mess_id=? and date = current_date+1";
+        db.execute(sql, [data.mess_id], function (results) {
+            callback(results);
+        });
+    },
+
     insert: function (meal, callback) {
         sql = "INSERT INTO meal (date, name, user_email, mess_id, breakfast, lunch, dinner) VALUES (current_date+1, ?, ?, ?, ?, ?, ?)";
         db.execute(sql, [meal.name, meal.email, meal.mess_id, meal.breakfast, meal.lunch, meal.dinner], function (results) {

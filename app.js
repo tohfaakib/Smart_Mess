@@ -19,6 +19,7 @@ var mess = require('./controller/mess');
 var expenses = require('./controller/expenses');
 var meal = require('./controller/meal');
 var calculation = require('./controller/calculation');
+var tomorrows_meal = require('./controller/tomorrow_meal');
 
 
 // config
@@ -43,6 +44,7 @@ app.use('/mess', mess);
 app.use('/expenses', expenses);
 app.use('/meal', meal);
 app.use('/calculation', calculation);
+app.use('/tomorrows_meal', tomorrows_meal);
 
 
 // Routing

@@ -1,0 +1,35 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+<% include ./partials/dashboard %>
+
+<br>
+
+<div class="container">
+
+    <br><br><br>
+
+    <input type="hidden" <%=  total_meal = 0; %> >
+    <% for(var i=0; i < result.length; i++) { %>
+        <input type="hidden" <%= total_meal = total_meal + result[i].breakfast + result[i].lunch + result[i].dinner %> >
+
+    <% } %>
+
+
+
+
+
+    <div class="jumbotron">
+
+        <p style="font-weight: bolder">Total Meal For Tomorrow: <%= total_meal %></p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<% include ./partials/footer %>

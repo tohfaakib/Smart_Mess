@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var moment = require('moment');
 
-var ontime = require('ontime');
 
 var expense_db = require.main.require('./models/expense-model');
 var meal_db = require.main.require('./models/meal-model');
@@ -37,7 +36,7 @@ router.get('/', (req, res) => {
                 name_1 = all[i+1].user_email;
 
                 if (name_0 == name_1){
-                    // console.log(allResult[i].date);
+
                     n_list.push(all[i]);
                 }else {
                     n_list.push(all[i]);
@@ -67,10 +66,6 @@ router.get('/', (req, res) => {
                     }
 
                     all_n.push({user_email: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
-                    // all_n.push({user_email: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'});
-
-                    // console.log(all_n);
-                    console.log("=======================================================================");
 
                     var byUser = all_n.slice(0);
                     byUser.sort(function(a,b) {
@@ -79,7 +74,7 @@ router.get('/', (req, res) => {
                         return x < y ? -1 : x > y ? 1 : 0;
                     });
 
-                    // console.log(byUser);
+
 
                     var list = [];
                     var e_name_list = [];
@@ -88,7 +83,6 @@ router.get('/', (req, res) => {
                         e_name_1 = byUser[i+1].user_email;
 
                         if (e_name_0 == e_name_1){
-                            // console.log(allResult[i].date);
                             list.push(byUser[i]);
                         }else {
                             list.push(byUser[i]);
@@ -97,7 +91,6 @@ router.get('/', (req, res) => {
                         }
                     }
 
-                    // console.log(e_name_list);
                     res.render('calculation', { page: 'Calculation', menuId: 'dashboard', moment: moment, name_list: name_list, expenses: expenses, e_name_list: e_name_list});
                 });
 
