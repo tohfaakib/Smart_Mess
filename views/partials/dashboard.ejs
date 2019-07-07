@@ -8,7 +8,8 @@
 
                     <li class=""><a href="/"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
 
-                    <% if(user.status != 'invited' && user.mess_id != null){ %>
+                    <% if(typeof user != "undefined"){ %>
+                        <% if(user.status != 'invited' && user.mess_id != null){ %>
 
                             <li><a href="/mess/<%= user.mess_id %>"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Mess</span></a></li>
 
@@ -16,6 +17,7 @@
 
                             <li><a href="/meal"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Meal</span></a></li>
                         <% } %>
+                    <% } %>
 
 
 
@@ -50,26 +52,31 @@
                         <div class="header-rightside">
                             <ul class="list-inline header-top pull-right">
 
-                                <% if(user.role == 'Manager'){ %>
-                                    <% if(user.mess_id == null || user.mess_id == ''){ %>
-                                        <li>
-                                            <a href="/mess/create" class="view btn-sm active">Create Mess</a>
-                                        </li>
-
-                                        <% } %>
-
-
-                                <% } %>
-
-                                <% if(user.role == 'Member'){ %>
-
-                                        <% if(user.status == 'invited'){ %>
+                                <% if(typeof user != "undefined"){ %>
+                                    <% if(user.role == 'Manager'){ %>
+                                        <% if(user.mess_id == null || user.mess_id == ''){ %>
                                             <li>
-                                                <a href="/mess/invitation/<%= user.mess_id %>" class="view btn-sm active">Mess Invitation</a>
+                                                <a href="/mess/create" class="view btn-sm active">Create Mess</a>
                                             </li>
 
-                                        <% } %>
+                                            <% } %>
 
+
+                                    <% } %>
+                                <% } %>
+
+
+                                <% if(typeof user != "undefined"){ %>
+                                    <% if(user.role == 'Member'){ %>
+
+                                            <% if(user.status == 'invited'){ %>
+                                                <li>
+                                                    <a href="/mess/invitation/<%= user.mess_id %>" class="view btn-sm active">Mess Invitation</a>
+                                                </li>
+
+                                            <% } %>
+
+                                    <% } %>
                                 <% } %>
 
                                 <li class="dropdown">
@@ -79,11 +86,11 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="navbar-content">
-                                                <span><%= user.first_name + " " + user.last_name %></span>
+                                                <span><% if(typeof user != "undefined"){ %><%= user.first_name + " " + user.last_name %><% } %></span>
 
                                                 <div class="divider">
                                                 </div>
-                                                <a href="/profile/<%= user.user_id %>" class="view btn-sm active">View
+                                                <a href="/profile/<% if(typeof user != "undefined"){ %><%= user.user_id %><% } %>" class="view btn-sm active">View
                                                     Profile</a>
                                             </div>
                                         </li>

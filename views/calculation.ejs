@@ -11,37 +11,88 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">Date</th>
             <th scope="col">Name</th>
-            <th scope="col">Item</th>
-            <th scope="col">Amount</th>
+            <th scope="col">Meal</th>
+            <th scope="col">Expenses</th>
+            <th scope="col">Meal Cost</th>
+            <th scope="col">Return</th>
         </tr>
         </thead>
         <tbody>
 
+        <input type="hidden" <%= total_meal = []; %> >
+
+        <% for(var i=0; i < name_list.length; i++) { %>
+            <input type="hidden" <%= user_meal = 0; %> >
+            <% for(var j=0; j < name_list[i].length; j++) { %>
+                <input type="hidden" <%= user_meal = user_meal + name_list[i][j].breakfast + name_list[i][j].lunch + name_list[i][j].dinner; %> >
+
+            <% } %>
+            <input type="hidden" <%= total_meal.push(user_meal); %> >
+        <% } %>
+
+
+
+
+        <input type="hidden" <%= user_amount = []; %> >
+
+        <% for(var i=0; i < e_name_list.length; i++) { %>
+            <input type="hidden" <%= single_amount = 0; %> >
+            <% for(var j=0; j < e_name_list[i].length; j++) { %>
+                <input type="hidden" <%= single_amount = single_amount + e_name_list[i][j].amount %> >
+
+            <% } %>
+            <input type="hidden" <%= user_amount.push(single_amount); %> >
+        <% } %>
 
         <input type="hidden" <%= total_amount = 0; %> >
 
-        <% for(var i=0; i < result.length; i++) { %>
-            <tr>
-                <th scope="row"><%= moment(result[i].date).format('Do MMM, YYYY') %></th>
-                <td><%= result[i].full_name %></td>
-                <td><%= result[i].item %></td>
-                <td><%= result[i].amount %></td>
+        <% for(var i=0; i < user_amount.length; i++) { %>
+            <input type="hidden" <%= total_amount = total_amount + user_amount[i]; %>>
+        <% } %>
 
-            </tr>
 
-            <input type="hidden" <%= total_amount = total_amount + result[i].amount; %>>
+        <input type="hidden" <%= total_meal_all_user = 0; %> >
+
+        <% for(var i=0; i < total_meal.length; i++) { %>
+            <input type="hidden" <%= total_meal_all_user = total_meal_all_user + total_meal[i]; %> >
+        <% } %>
+
+        <input type="hidden" <%= meal_rate = total_amount / total_meal_all_user; %> >
+
+
+        <% for(var i=0; i < name_list.length; i++) { %>
+                <tr>
+                    <td><%= name_list[i][0].name %></td>
+                    <td><%= total_meal[i] %></td>
+                    <td><%= user_amount[i] %></td>
+                    <td><%= (total_meal[i] * meal_rate).toFixed(2) %></td>
+                    <td><%= (user_amount[i] - (total_meal[i] * meal_rate)).toFixed(2) %></td>
+                </tr>
+
+
+
         <% } %>
 
         <tr>
             <th scope="row">Total</th>
-            <td></td>
-            <td></td>
+            <td><%= total_meal_all_user %></td>
             <td><%= total_amount %></td>
+            <td><%= (meal_rate * total_meal_all_user).toFixed(2) %></td>
+            <td><%= ((meal_rate * total_meal_all_user)-total_amount).toFixed(2) %></td>
         </tr>
         </tbody>
+
     </table>
+
+
+
+
+    <div class="jumbotron">
+
+        <p style="font-weight: bolder">Meal Rate: <%= meal_rate.toFixed(2) %></p>
+
+    </div>
 
 </div>
 

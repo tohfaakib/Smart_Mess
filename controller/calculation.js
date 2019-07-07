@@ -18,7 +18,6 @@ router.get('/', (req, res) => {
         };
 
         meal_db.getMealByEmail(data, (allResults) => {
-            // console.log(allResult[0]);
             var all = allResults;
 
 
@@ -41,12 +40,42 @@ router.get('/', (req, res) => {
                 }
             }
 
-
             console.log(name_list);
+            console.log("=======================================================================");
+
+
 
             if (allResults) {
 
-                res.render('calculation', { page: 'Calculation', menuId: 'dashboard', moment: moment, name_list: name_list});
+                var data = {
+                    mess_id: req.session.mess_id,
+                };
+
+                expense_db.getExpensesByEmail(data, (expenses) => {
+                    var all_n = expenses;
+
+                    all_n.push({user_email: 'mara khaw'});
+
+                    var list = [];
+                    var e_name_list = [];
+                    for(var i=0; i<all_n.length-1; i++){
+                        e_name_0 = all_n[i].user_email;
+                        e_name_1 = all_n[i+1].user_email;
+
+                        if (e_name_0 == e_name_1){
+                            // console.log(allResult[i].date);
+                            list.push(all_n[i]);
+                        }else {
+                            list.push(all_n[i]);
+                            e_name_list.push(list);
+                            list = [];
+                        }
+                    }
+
+                    console.log(e_name_list);
+                    res.render('calculation', { page: 'Calculation', menuId: 'dashboard', moment: moment, name_list: name_list, expenses: expenses, e_name_list: e_name_list});
+                });
+
             } else {
                 res.redirect('/');
             }
