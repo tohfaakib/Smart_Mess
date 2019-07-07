@@ -1,0 +1,54 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+<% include ./partials/dashboard %>
+
+<br>
+
+<div class="container">
+
+    <br><br><br>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Item</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <input type="hidden" <%= total_amount = 0; %> >
+
+        <% for(var i=0; i < result.length; i++) { %>
+            <tr>
+                <th scope="row"><%= moment(result[i].date).format('Do MMM, YYYY') %></th>
+                <td><%= result[i].full_name %></td>
+                <td><%= result[i].item %></td>
+                <td><%= result[i].amount %></td>
+
+            </tr>
+
+            <input type="hidden" <%= total_amount = total_amount + result[i].amount; %>>
+        <% } %>
+
+        <tr>
+            <th scope="row">Total</th>
+            <td></td>
+            <td></td>
+            <td><%= total_amount %></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+
+<% include ./partials/footer %>
