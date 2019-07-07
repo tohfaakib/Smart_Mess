@@ -18,6 +18,14 @@ module.exports = {
         });
     },
 
+    getMealByEmail: function (data, callback) {
+
+        var sql = "select * from meal where mess_id=? and current_date >= date and YEAR(date) = YEAR(CURRENT_DATE()) AND MONTH(date) = MONTH(CURRENT_DATE()) order by user_email asc";
+        db.execute(sql, [data.mess_id], function (results) {
+            callback(results);
+        });
+    },
+
     insert: function (meal, callback) {
         sql = "INSERT INTO meal (date, name, user_email, mess_id, breakfast, lunch, dinner) VALUES (current_date-4, ?, ?, ?, ?, ?, ?)";
         db.execute(sql, [meal.name, meal.email, meal.mess_id, meal.breakfast, meal.lunch, meal.dinner], function (results) {

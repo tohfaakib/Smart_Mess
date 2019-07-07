@@ -18,6 +18,7 @@ var contact = require('./controller/contact');
 var mess = require('./controller/mess');
 var expenses = require('./controller/expenses');
 var meal = require('./controller/meal');
+var calculation = require('./controller/calculation');
 
 
 // config
@@ -41,6 +42,7 @@ app.use('/contact', contact);
 app.use('/mess', mess);
 app.use('/expenses', expenses);
 app.use('/meal', meal);
+app.use('/calculation', calculation);
 
 
 // Routing
