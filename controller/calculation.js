@@ -20,9 +20,7 @@ router.get('/', (req, res) => {
         meal_db.getMealByEmail(data, (allResults) => {
             var all = allResults;
 
-
-
-            all.push({user_email: 'mara khaw'});
+            all.push({user_email: 'zzzzzz zzzzzzzzz zzz'});
 
             var n_list = [];
             var name_list = [];
@@ -41,7 +39,7 @@ router.get('/', (req, res) => {
             }
 
             console.log(name_list);
-            console.log("=======================================================================");
+
 
 
 
@@ -54,25 +52,44 @@ router.get('/', (req, res) => {
                 expense_db.getExpensesByEmail(data, (expenses) => {
                     var all_n = expenses;
 
-                    all_n.push({user_email: 'mara khaw'});
+
+                    for (var k=0; k<name_list.length; k++){
+                        all_n.push({user_email: name_list[k][0].user_email, amount: 0});
+
+                    }
+
+                    all_n.push({user_email: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
+                    // all_n.push({user_email: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'});
+
+                    // console.log(all_n);
+                    console.log("=======================================================================");
+
+                    var byUser = all_n.slice(0);
+                    byUser.sort(function(a,b) {
+                        var x = a.user_email.toLowerCase();
+                        var y = b.user_email.toLowerCase();
+                        return x < y ? -1 : x > y ? 1 : 0;
+                    });
+
+                    // console.log(byUser);
 
                     var list = [];
                     var e_name_list = [];
-                    for(var i=0; i<all_n.length-1; i++){
-                        e_name_0 = all_n[i].user_email;
-                        e_name_1 = all_n[i+1].user_email;
+                    for(var i=0; i<byUser.length-1; i++){
+                        e_name_0 = byUser[i].user_email;
+                        e_name_1 = byUser[i+1].user_email;
 
                         if (e_name_0 == e_name_1){
                             // console.log(allResult[i].date);
-                            list.push(all_n[i]);
+                            list.push(byUser[i]);
                         }else {
-                            list.push(all_n[i]);
+                            list.push(byUser[i]);
                             e_name_list.push(list);
                             list = [];
                         }
                     }
 
-                    console.log(e_name_list);
+                    // console.log(e_name_list);
                     res.render('calculation', { page: 'Calculation', menuId: 'dashboard', moment: moment, name_list: name_list, expenses: expenses, e_name_list: e_name_list});
                 });
 

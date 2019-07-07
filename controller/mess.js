@@ -4,6 +4,8 @@ var router = express.Router();
 
 var mess_db = require.main.require('./models/mess-model');
 var user_db = require.main.require('./models/user-model');
+var meal_db = require.main.require('./models/meal-model');
+
 
 
 router.get('*', (req, res, next) => {
@@ -84,6 +86,25 @@ router.get('/accept/:id', (req, res) => {
             user = {
               status: req.session.status,
             };
+
+            data ={
+                name: req.session.first_name,
+                email: req.session.email,
+                mess_id: req.params.id,
+                breakfast: 0,
+                lunch: 0,
+                dinner: 0
+            };
+
+            meal_db.insertAcc(data, (result)=> {
+                if (result){
+                    console.log("inserted");
+                } else {
+                    console.log("not inserted");
+                }
+            });
+
+
 
             res.redirect('/');
         } else {

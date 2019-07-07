@@ -64,7 +64,7 @@ router.get('/', (req, res) => {
         // console.log(result);
 
         var data={
-            mess_id: result[0].mess_id,
+            mess_id: req.session.mess_id,
         };
 
         meal_db.getAllUsersMealByMessId(data, (allResults) => {
@@ -92,6 +92,7 @@ router.get('/', (req, res) => {
             console.log(date_list);
             if(result && allResult)
             {
+                console.log(date_list);
 
                 res.render('meal', {page: 'Meal', menuId: 'dashboard', moment: moment, result: result[0], date_list: date_list});
             }
