@@ -11,7 +11,7 @@ var user_db = require.main.require('./models/user-model');
 
 
 ontime({
-    cycle: ['18:04:00']
+    cycle: ['9:08:00']
 }, function (ot) {
     console.log("on time runs!");
 
@@ -58,15 +58,48 @@ router.get('/', (req, res) => {
     var data={
       email: req.session.email,
     };
-    meal_db.getMealByDate(data,(result) => {
+    meal_db.getMealByDateEmail(data,(result) => {
 
-        if(result)
-        {
-            res.render('meal', {page: 'Meal', menuId: 'dashboard', moment: moment, result: result[0]});
-        }
-        else{
-            res.redirect('/meal');
-        }
+        // console.log(result);
+
+        var data={
+            mess_id: result[0].mess_id,
+        };
+
+        meal_db.getAllUsersMealByMessId(data, (allResults) => {
+            // console.log(allResult[0]);
+            var allResult = allResults;
+
+            allResult.push({date: 'mara khaw'});
+
+            var list = [];
+            var date_list = [];
+            for(var i=0; i<allResult.length-1; i++){
+                date_0 = allResult[i].date;
+                date_1 = allResult[i+1].date;
+
+                if (date_0.toString() == date_1.toString()){
+                    // console.log(allResult[i].date);
+                    list.push(allResult[i]);
+                }else {
+                    list.push(allResult[i]);
+                    date_list.push(list);
+                    list = [];
+                }
+            }
+
+            console.log(date_list);
+            if(result && allResult)
+            {
+
+                res.render('meal', {page: 'Meal', menuId: 'dashboard', moment: moment, result: result[0], date_list: date_list});
+            }
+            else{
+                res.redirect('/meal');
+            }
+        });
+
+
     });
 
 });
