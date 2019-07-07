@@ -17,3 +17,5 @@ function togglePrimaryButtonStyle(el) {
     el.addClass('btn-primary');
     sibling.removeClass('btn-primary').addClass('btn-default');
 }
+
+desktopBtn.click();

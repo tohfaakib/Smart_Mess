@@ -19,8 +19,8 @@ module.exports = {
     },
 
     insert: function (meal, callback) {
-        sql = "INSERT INTO meal (date, user_email, mess_id, breakfast, lunch, dinner) VALUES (current_date+1, ?, ?, ?, ?, ?)";
-        db.execute(sql, [meal.email, meal.mess_id, meal.breakfast, meal.lunch, meal.dinner], function (results) {
+        sql = "INSERT INTO meal (date, name, user_email, mess_id, breakfast, lunch, dinner) VALUES (current_date-4, ?, ?, ?, ?, ?, ?)";
+        db.execute(sql, [meal.name, meal.email, meal.mess_id, meal.breakfast, meal.lunch, meal.dinner], function (results) {
             callback(results);
         });
     },

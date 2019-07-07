@@ -11,7 +11,7 @@ var user_db = require.main.require('./models/user-model');
 
 
 ontime({
-    cycle: ['9:08:00']
+    cycle: ['14:30:00']
 }, function (ot) {
     console.log("on time runs!");
 
@@ -19,6 +19,7 @@ ontime({
         if(results){
             for (var i =0; i < results.length; i++) {
                 data ={
+                    name: results[i].first_name,
                     email: results[i].email,
                     mess_id: results[i].mess_id,
                     breakfast: 1,
