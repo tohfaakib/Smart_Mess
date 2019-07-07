@@ -9,6 +9,14 @@ var meal_db = require.main.require('./models/meal-model');
 var user_db = require.main.require('./models/user-model');
 
 
+router.get('*', (req, res, next) => {
+    if (req.session.email != null) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+});
+
 
 
 router.get('/', (req, res) => {

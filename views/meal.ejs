@@ -103,10 +103,10 @@
                     <tr style="font-weight: bolder">
                         <td data-title="Date"></td>
 
-                        <% for(var i=0; i < date_list[0].length; i++) { %>
-                            <td data-title="<%= date_list[0][i].name %>">B</td>
-                            <td data-title="<%= date_list[0][i].name %>">L</td>
-                            <td data-title="<%= date_list[0][i].name %>">D</td>
+                        <% for(var i=0; i < date_list[date_list.length-1].length; i++) { %>
+                            <td data-title="<%= date_list[date_list.length-1][i].name %>">B</td>
+                            <td data-title="<%= date_list[date_list.length-1][i].name %>">L</td>
+                            <td data-title="<%= date_list[date_list.length-1][i].name %>">D</td>
 
                         <% } %>
 

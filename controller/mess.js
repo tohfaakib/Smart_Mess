@@ -86,7 +86,6 @@ router.get('/accept/:id', (req, res) => {
             user = {
               status: req.session.status,
             };
-
             data ={
                 name: req.session.first_name,
                 email: req.session.email,
@@ -95,8 +94,23 @@ router.get('/accept/:id', (req, res) => {
                 lunch: 0,
                 dinner: 0
             };
-
             meal_db.insertAcc(data, (result)=> {
+                if (result){
+                    console.log("inserted");
+                } else {
+                    console.log("not inserted");
+                }
+            });
+
+            datas ={
+                name: req.session.first_name,
+                email: req.session.email,
+                mess_id: req.params.id,
+                breakfast: 1,
+                lunch: 1,
+                dinner: 1
+            };
+            meal_db.insert(datas, (result)=> {
                 if (result){
                     console.log("inserted");
                 } else {

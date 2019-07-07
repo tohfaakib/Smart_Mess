@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
     expense_db.getAllUsersExpensesByMessId(data, (result) => {
         // console.log(result);
 
-        res.render('expenses', {page: 'Dashboard', menuId: 'dashboard', result: result, moment: moment});
+        res.render('expenses', {page: 'Expenses', menuId: 'dashboard', result: result, moment: moment});
 
     });
 
