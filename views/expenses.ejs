@@ -52,7 +52,7 @@
         <thead>
         <tr>
             <th scope="col">Date</th>
-            <th scope="col">Email</th>
+            <th scope="col">Name</th>
             <th scope="col">Item</th>
             <th scope="col">Amount</th>
         </tr>
@@ -65,7 +65,7 @@
         <% for(var i=0; i < result.length; i++) { %>
             <tr>
                 <th scope="row"><%= moment(result[i].date).format('Do MMM, YYYY') %></th>
-                <td><%= result[i].user_email %></td>
+                <td><%= result[i].full_name %></td>
                 <td><%= result[i].item %></td>
                 <td><%= result[i].amount %></td>
 

@@ -47,8 +47,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
+    console.log(req.session.first_name +" "+req.session.last_name,);
+
     var data = {
         mess_id: req.session.mess_id,
+        full_name: req.session.first_name +" "+req.session.last_name,
         email: req.session.email,
         amount: req.body.amount,
         item: req.body.item,
