@@ -46,12 +46,7 @@ router.get('/', (req, res) => {
 
             if (allResults) {
 
-                res.render('calculation', {
-                    page: 'Calculation',
-                    menuId: 'dashboard',
-                    moment: moment,
-                    name_list: name_list
-                });
+                res.render('calculation', { page: 'Calculation', menuId: 'dashboard', moment: moment, name_list: name_list});
             } else {
                 res.redirect('/');
             }
