@@ -172,24 +172,24 @@ router.post('/invite/:id', (req, res) => {
             status: "invited",
         };
 
-        user_db.getByEmail(data,(result) => {
-
-            if(result){
-                if(result[0].mess_id == null){
+        user_db.getByEmail(data, (result) => {
+            if (result.length > 0) {
+                if (result[0].mess_id == null) {
                     user_db.updateByStatus(data, (result) => {
                         if (result) {
-                            res.redirect('/mess/'+data.mess_id);
+                            res.redirect('/mess/' + data.mess_id);
                         } else {
                             res.send("Cannot Invite!");
                         }
                     });
-                }else {
+                } else {
                     res.render('invite-member', {page: 'Invite Members', menuId: 'mess', is_invited: 'yes'});
                 }
-            }else {
+            } else {
                 res.render('invite-member', {page: 'Invite Members', menuId: 'mess', user_exist: 'no'});
             }
         });
+
 
 
     }
@@ -239,6 +239,42 @@ router.post('/create', (req, res) => {
                                 user = {
                                   mess_id: req.session.mess_id,
                                 };
+
+                                data ={
+                                    name: req.session.first_name,
+                                    email: req.session.email,
+                                    mess_id: req.body.mess_id,
+                                    breakfast: 0,
+                                    lunch: 0,
+                                    dinner: 0
+                                };
+                                meal_db.insertAcc(data, (result)=> {
+                                    if (result){
+                                        console.log("inserted");
+                                    } else {
+                                        console.log("not inserted");
+                                    }
+                                });
+
+                                datas ={
+                                    name: req.session.first_name,
+                                    email: req.session.email,
+                                    mess_id: req.body.mess_id,
+                                    breakfast: 1,
+                                    lunch: 1,
+                                    dinner: 1
+                                };
+                                meal_db.insert(datas, (result)=> {
+                                    if (result){
+                                        console.log("inserted");
+                                    } else {
+                                        console.log("not inserted");
+                                    }
+                                });
+
+
+
+
 
                                 res.redirect('/');
                             } else {
