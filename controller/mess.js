@@ -19,7 +19,7 @@ router.get('*', (req, res, next) => {
 router.get('/create', (req, res) => {
     if(req.session.role == "Manager") {
         if (req.session.mess_id == null || req.session.mess_id == '') {
-            res.render('create-mess', {page: 'Create Mess', menuId: 'create-mess'});
+            res.render('mess/create-mess', {page: 'Create Mess', menuId: 'create-mess'});
         } else {
             res.redirect('/');
         }
@@ -33,7 +33,7 @@ router.get('/create', (req, res) => {
 
 router.get('/:id', (req, res) => {
     if(req.session.status != "invited" && (req.session.mess_id != null || req.session.mess_id != '')) {
-        res.render('mess', {page: 'Mess', menuId: 'mess'});
+        res.render('mess/mess', {page: 'Mess', menuId: 'mess'});
     }else {
         res.redirect('/');
     }
@@ -47,7 +47,7 @@ router.get('/members/:id', (req, res) => {
             mess_id: req.params.id,
         };
         user_db.getAllByMessId(data, (result) => {
-            res.render('view-member', {page: 'Members', menuId: 'mess', result: result});
+            res.render('mess/view-member', {page: 'Members', menuId: 'mess', result: result});
         });
     }else {
         res.redirect('/');
@@ -62,7 +62,7 @@ router.get('/invitation/:id', (req, res) => {
     if(req.session.role == "Member")
     {
         mess_db.getByMessId(req.params.id, (result) => {
-            res.render('invitation', {page: 'Invitation', menuId: 'mess', result: result[0]});
+            res.render('mess/invitation', {page: 'Invitation', menuId: 'mess', result: result[0]});
         });
     }
     else
@@ -155,7 +155,7 @@ router.get('/cancel/:id', (req, res) => {
 
 router.get('/invite/:id', (req, res) => {
     if(req.session.role != "Member") {
-        res.render('invite-member', {page: 'Invite Members', menuId: 'mess'});
+        res.render('mess/invite-member', {page: 'Invite Members', menuId: 'mess'});
     }else {
         res.redirect('/');
     }
@@ -183,10 +183,10 @@ router.post('/invite/:id', (req, res) => {
                         }
                     });
                 } else {
-                    res.render('invite-member', {page: 'Invite Members', menuId: 'mess', is_invited: 'yes'});
+                    res.render('mess/invite-member', {page: 'Invite Members', menuId: 'mess', is_invited: 'yes'});
                 }
             } else {
-                res.render('invite-member', {page: 'Invite Members', menuId: 'mess', user_exist: 'no'});
+                res.render('mess/invite-member', {page: 'Invite Members', menuId: 'mess', user_exist: 'no'});
             }
         });
 
@@ -213,7 +213,7 @@ router.post('/create', (req, res) => {
     const err = req.validationErrors();
 
     if (err){
-        res.render('create-mess', {page: 'Create Mess', menuId: 'login', errors: err});
+        res.render('mess/create-mess', {page: 'Create Mess', menuId: 'login', errors: err});
     } else {
         data = {
             mess_id: req.body.mess_id,
@@ -222,7 +222,7 @@ router.post('/create', (req, res) => {
 
         mess_db.getByMessId(data.mess_id, (result) => {
             if (result.length > 0){
-                res.render('create-mess', {page: 'Create Mess', menuId: 'create-mess', mess_exist: 'yes'})
+                res.render('mess/create-mess', {page: 'Create Mess', menuId: 'create-mess', mess_exist: 'yes'})
             } else {
                 mess_db.insert(data, (result) => {
                     if (result) {
