@@ -94,7 +94,7 @@ router.get('/', (req, res) => {
             {
                 console.log(date_list);
 
-                res.render('meal', {page: 'Meal', menuId: 'dashboard', moment: moment, result: result[0], date_list: date_list});
+                res.render('meal/meal', {page: 'Meal', menuId: 'dashboard', moment: moment, result: result[0], date_list: date_list});
             }
             else{
                 res.redirect('/meal');

@@ -15,7 +15,7 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    res.render('login', {page: 'Login', menuId: 'login'});
+    res.render('login/login', {page: 'Login', menuId: 'login'});
 });
 
 
@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 
 
     if (err) {
-        res.render('login', {page: 'Login', menuId: 'login', errors: err});
+        res.render('login/login', {page: 'Login', menuId: 'login', errors: err});
     } else {
         data = {
             email: req.body.email,

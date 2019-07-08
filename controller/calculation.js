@@ -91,7 +91,7 @@ router.get('/', (req, res) => {
                         }
                     }
 
-                    res.render('calculation', { page: 'Calculation', menuId: 'dashboard', moment: moment, name_list: name_list, expenses: expenses, e_name_list: e_name_list});
+                    res.render('calculation/calculation', { page: 'Calculation', menuId: 'dashboard', moment: moment, name_list: name_list, expenses: expenses, e_name_list: e_name_list});
                 });
 
             } else {

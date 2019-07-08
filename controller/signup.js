@@ -13,7 +13,7 @@ router.get('*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    res.render('signup', {page: 'SignUp', menuId: 'signup'});
+    res.render('signup/signup', {page: 'SignUp', menuId: 'signup'});
 });
 
 
@@ -24,9 +24,9 @@ router.get('/updated_signup/:str', (req, res) => {
     user_db.getByEmail(data, (result) => {
         console.log("result",result.length);
         if (result.length > 0) {
-            res.render('updated_signup', {page: 'SignUp', menuId: 'Signup', str:"1"});
+            res.render('signup/updated_signup', {page: 'SignUp', menuId: 'Signup', str:"1"});
         } else {
-            res.render('updated_signup', {page: 'SignUp', menuId: 'Signup', str:"2"});
+            res.render('signup/updated_signup', {page: 'SignUp', menuId: 'Signup', str:"2"});
         }
     });
 
@@ -42,14 +42,14 @@ router.post('/', (req, res) => {
 
         user_db.getByEmail(data, (result) => {
             if (result.length > 0) {
-                res.render('signup', {page: 'SignUp', menuId: 'signup', email_exist: 'yes'});
+                res.render('signup/signup', {page: 'SignUp', menuId: 'signup', email_exist: 'yes'});
             } else {
                 var data = {
                     phone: req.body.phone
                 };
                 user_db.getByPhone(data, (result) => {
                     if (result.length > 0) {
-                        res.render('signup', {page: 'SignUp', menuId: 'signup', phone_exist: 'yes'});
+                        res.render('signup/signup', {page: 'SignUp', menuId: 'signup', phone_exist: 'yes'});
                     } else {
                         req.checkBody('first_name', '*First Name field cannot be empty!').notEmpty();
                         req.checkBody('last_name', '*Last Name field cannot be empty!').notEmpty();
@@ -65,7 +65,7 @@ router.post('/', (req, res) => {
                         const err = req.validationErrors();
 
                         if (err) {
-                            res.render('signup', {page: 'SignUp', menuId: 'signup', errors: err});
+                            res.render('signup/signup', {page: 'SignUp', menuId: 'signup', errors: err});
                         } else {
                             var data = {
                                 first_name: req.body.first_name,
@@ -91,7 +91,7 @@ router.post('/', (req, res) => {
         });
 
     } else {
-        res.render('signup', {page: 'SignUp', menuId: 'signup', pass_mismatch: 'yes'});
+        res.render('signup/signup', {page: 'SignUp', menuId: 'signup', pass_mismatch: 'yes'});
     }
 });
 

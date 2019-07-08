@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
     meal_db.getMealByTomorrow(data, (result) => {
         if (result){
             console.log(result);
-            res.render('tomorrow-meal', { page: 'Tomorrows Meal', menuId: 'dashboard', result: result});
+            res.render('tomorrow-meal/tomorrow-meal', { page: 'Tomorrows Meal', menuId: 'dashboard', result: result});
         }
     });
 

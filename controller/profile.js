@@ -17,7 +17,7 @@ router.get('*', (req, res, next) => {
 router.get('/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
         user_db.getById(req.params.id, (result) => {
-            res.render('profile', {page: 'Profile', menuId: 'profile', result: result[0]});
+            res.render('profile/profile', {page: 'Profile', menuId: 'profile', result: result[0]});
         });
     } else {
         res.redirect('/profile/' + req.session.user_id);
@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
 router.get('/edit/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
         user_db.getById(req.params.id, (result) => {
-            res.render('edit_profile', {page: 'Edit Profile', menuId: 'profile', result: result[0]});
+            res.render('profile/edit_profile', {page: 'Edit Profile', menuId: 'profile', result: result[0]});
         });
     } else {
         res.redirect('/profile/edit/' + req.session.user_id);
@@ -50,7 +50,7 @@ update = (req, res, results) => {
     const err = req.validationErrors();
 
     if (err) {
-        res.render('edit_profile', {page: 'Edit Profile', menuId: 'profile', email_exist: 'yes', result: results[0]});
+        res.render('profile/edit_profile', {page: 'Edit Profile', menuId: 'profile', email_exist: 'yes', result: results[0]});
     } else {
         var data = {
             id: req.params.id,
@@ -86,7 +86,7 @@ router.post('/edit/:id', (req, res) => {
 
             user_db.getByEmail(data, (result) => {
                 if (result.length > 0 && results[0].id !== result[0].id) {
-                    res.render('edit_profile', {
+                    res.render('profile/edit_profile', {
                         page: 'Edit Profile',
                         menuId: 'profile',
                         email_exist: 'yes',
@@ -98,7 +98,7 @@ router.post('/edit/:id', (req, res) => {
                     };
                     user_db.getByPhone(data, (result) => {
                         if (result.length > 0 && results[0].id !== result[0].id) {
-                            res.render('edit_profile', {
+                            res.render('profile/edit_profile', {
                                 page: 'Edit Profile',
                                 menuId: 'profile',
                                 phone_exist: 'yes',
@@ -125,7 +125,7 @@ router.post('/edit/:id', (req, res) => {
 router.get('/change-password/:id', (req, res) => {
     if (req.session.user_id == req.params.id) {
         user_db.updateById(req.params.id, (result) => {
-            res.render('change_password', {
+            res.render('profile/change_password', {
                 page: 'Change Password',
                 menuId: 'change_pass',
                 invalid_pass: null,
@@ -148,7 +148,7 @@ router.post('/change-password/:id', (req, res) => {
     const err = req.validationErrors();
 
     if (err) {
-        res.render('change_password', {
+        res.render('profile/change_password', {
             page: 'Change Password',
             menuId: 'change_pass',
             errors: err
@@ -174,7 +174,7 @@ router.post('/change-password/:id', (req, res) => {
                         }
                     });
                 } else {
-                    res.render('change_password', {
+                    res.render('profile/change_password', {
                         page: 'Change Password',
                         menuId: 'change_pass',
                         pass_mismatch: 'yes',
@@ -182,7 +182,7 @@ router.post('/change-password/:id', (req, res) => {
                     });
                 }
             } else
-                res.render('change_password', {
+                res.render('profile/change_password', {
                     page: 'Change Password',
                     menuId: 'change_pass',
                     invalid_pass: 'yes',
