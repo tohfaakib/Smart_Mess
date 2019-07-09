@@ -11,7 +11,7 @@ var user_db = require.main.require('./models/user-model');
 
 
 ontime({
-    cycle: ['14:30:00']
+    cycle: ['00:00:00']
 }, function (ot) {
     console.log("on time runs!");
 
